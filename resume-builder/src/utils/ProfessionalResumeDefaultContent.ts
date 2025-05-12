@@ -37,6 +37,18 @@ Certifications: Professional Engineer (PE) License, Project Management Professio
 Awards/Activities: Received the "Engineering Excellence" Award for outstanding contributions to project innovation, Borcelle Technologies`
 }; 
 
+export const defaultTextContentCSS = `
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: black;
+    white-space: pre-wrap;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background: white;
+`;
+
 export const defaultResumeStaticCSS = `.resume-container {
                     background: white !important;
                     color: black !important;

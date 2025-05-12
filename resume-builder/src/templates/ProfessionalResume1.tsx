@@ -4,7 +4,7 @@ import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import '../styles/ProfessionalResume1.css';
-import { ResumeData, defaultResumeContent, defaultResumeStaticCSS } from '../utils/ProfessionalResumeDefaultContent';
+import { ResumeData, defaultResumeContent, defaultResumeStaticCSS, defaultTextContentCSS } from '../utils/ProfessionalResumeDefaultContent';
 
 const ProfessionalResume1: React.FC = () => {
     const [resumeData, setResumeData] = useState<ResumeData>(defaultResumeContent);
@@ -48,15 +48,7 @@ const ProfessionalResume1: React.FC = () => {
                         const textContent = field.value;
                         const textDiv = document.createElement('div');
                         textDiv.style.cssText = `
-                            font-family: Arial, sans-serif;
-                            font-size: 14px;
-                            line-height: 1.6;
-                            color: black;
-                            white-space: pre-wrap;
-                            margin: 0;
-                            padding: 0;
-                            width: 100%;
-                            background: white;
+                            ${defaultTextContentCSS}
                         `;
                         textDiv.textContent = textContent;
                         
