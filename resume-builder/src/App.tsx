@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import Home from './components/Home';
-import ProfessionalResume1 from './templates/ProfessionalResume1';
+import ProfessionalResumeBasic from './templates/ProfessionalResumeBasic';
 
 // Create a theme instance
 const theme = createTheme({
@@ -25,7 +25,7 @@ const App: React.FC = () => {
         <div className="App">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/template/:templateId" element={<ProfessionalResume1 />} />
+            <Route path="/template/:templateId" element={<ProfessionalResumeBasic />} />
           </Routes>
         </div>
       </Router>

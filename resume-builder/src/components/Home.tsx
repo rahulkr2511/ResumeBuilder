@@ -16,8 +16,8 @@ const Home: React.FC = () => {
 
   const templates: Template[] = [
     {
-      id: 'template1',
-      name: 'Professional',
+      id: 'professionalBasic',
+      name: 'Professional Basic',
       description: 'A clean and professional template suitable for most industries',
       // thumbnail: 'path-to-thumbnail'
     },

@@ -3,23 +3,27 @@ import { TextField, Button, Divider, Box, Menu, MenuItem, IconButton } from '@mu
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import '../styles/ProfessionalResume1.css';
+import '../styles/ProfessionalResumeBasic.css';
+import { useNavigate } from 'react-router-dom';
 import { ResumeData, defaultResumeContent, defaultResumeStaticCSS, defaultTextContentCSS } from '../utils/ProfessionalResumeDefaultContent';
 
-const ProfessionalResume1: React.FC = () => {
+const ProfessionalResumeBasic: React.FC = () => {
     const [resumeData, setResumeData] = useState<ResumeData>(defaultResumeContent);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const resumeRef = useRef<HTMLDivElement>(null);
+    const navigate = useNavigate();
 
     const handleChange = (field: keyof ResumeData, value: string) => {
         setResumeData({ ...resumeData, [field]: value });
     };
 
     const handleSave = () => {
-        // Save to localStorage
-        localStorage.setItem('resumeData', JSON.stringify(resumeData));
-        alert('Changes saved successfully!');
+        // TODO: Create Slice to save the resume data
     };
+
+    const handleBack = () => {
+        navigate(`/`);
+    }
 
     const handleDownloadPDF = async () => {
         if (!resumeRef.current) return;
@@ -113,6 +117,22 @@ const ProfessionalResume1: React.FC = () => {
 
     return (
         <div className="resume-wrapper">
+             <Box className="resume-actions" sx={{ 
+                position: 'fixed', 
+                top: 20, 
+                left: 20, 
+                zIndex: 1000,
+                display: 'flex',
+                gap: 2
+            }}>
+                <Button 
+                    variant="outlined" 
+                    color="primary" 
+                    onClick={handleBack}
+                >
+                    Back
+                </Button>
+            </Box>
             <Box className="resume-actions" sx={{ 
                 position: 'fixed', 
                 top: 20, 
@@ -269,4 +289,4 @@ const ProfessionalResume1: React.FC = () => {
     );
 };
 
-export default ProfessionalResume1;
+export default ProfessionalResumeBasic;
