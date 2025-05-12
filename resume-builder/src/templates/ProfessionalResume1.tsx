@@ -2,50 +2,12 @@ import React, { useState, useRef } from 'react';
 import { TextField, Button, Divider, Box, Menu, MenuItem, IconButton } from '@mui/material';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import { Document, Packer, Paragraph, TextRun } from 'docx';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import '../styles/ProfessionalResume1.css';
-
-interface ResumeData {
-    name: string;
-    summary: string;
-    workExperience: string;
-    education: string;
-    additionalInfo: string;
-    contact: string;
-}
+import { ResumeData, defaultResumeContent } from '../utils/ProfessionalResumeDefaultContent';
 
 const ProfessionalResume1: React.FC = () => {
-    const [resumeData, setResumeData] = useState<ResumeData>({
-        name: "JACQUELINE THOMPSON",
-        contact: `123 Anywhere St., Any City • 123-456-7890 • hello@reallygreatsite.com • www.reallygreatsite.com`,
-        summary: `Results-oriented Engineering Executive with a proven track record of optimizing project outcomes. 
-Skilled in strategic project management and team leadership. Seeking a challenging executive role 
-to leverage technical expertise and drive engineering excellence.`,
-        workExperience: `Engineering Executive, Borcelle Technologies (Jan 2023 - Present)
-- Implemented cost-effective solutions, resulting in a 20% reduction in project expenses.
-- Streamlined project workflows, enhancing overall efficiency by 25%.
-- Led a team in successfully delivering a complex engineering project on time and within budget.
-
-Project Engineer, Salford & Co (Mar 2021 - Dec 2022)
-- Managed project timelines, reducing delivery times by 30%.
-- Spearheaded the adoption of cutting-edge engineering software, improving project accuracy by 15%.
-- Collaborated with cross-functional teams, enhancing project success rates by 10%.
-
-Graduate Engineer, Arowwai Industries (Feb 2020 - Jan 2021)
-- Coordinated project tasks, ensuring adherence to engineering standards and regulations.
-- Conducted comprehensive project analyses, identifying and rectifying discrepancies in engineering designs.`,
-        education: `Master of Science in Mechanical Engineering, University of Engineering and Technology (Sep 2019 - Oct 2020)
-Specialization in Advanced Manufacturing. Thesis on "Innovations in Sustainable Engineering Practices".
-
-Bachelor of Science in Civil Engineering, City College of Engineering (Aug 2015 - Aug 2019)
-Relevant coursework in Structural Design and Project Management.`,
-        additionalInfo: `Technical Skills: Project Management, Structural Analysis, Robotics and Automation, CAD
-Languages: English, Malay, German
-Certifications: Professional Engineer (PE) License, Project Management Professional (PMP)
-Awards/Activities: Received the "Engineering Excellence" Award for outstanding contributions to project innovation, Borcelle Technologies`
-        
-    });
+    const [resumeData, setResumeData] = useState<ResumeData>(defaultResumeContent);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const resumeRef = useRef<HTMLDivElement>(null);
 
@@ -191,63 +153,6 @@ Awards/Activities: Received the "Engineering Excellence" Award for outstanding c
             if (buttons) buttons.style.display = 'flex';
         }
     };
-    
-    
-    
-
-    const handleDownloadDOCX = async () => {
-        const doc = new Document({
-            sections: [{
-                properties: {},
-                children: [
-                    new Paragraph({
-                        children: [
-                            new TextRun({
-                                text: resumeData.name,
-                                bold: true,
-                                size: 32
-                            })
-                        ]
-                    }),
-                    new Paragraph({
-                        children: [new TextRun(resumeData.contact)]
-                    }),
-                    new Paragraph({
-                        children: [new TextRun('\nSUMMARY\n')]
-                    }),
-                    new Paragraph({
-                        children: [new TextRun(resumeData.summary)]
-                    }),
-                    new Paragraph({
-                        children: [new TextRun('\nWORK EXPERIENCE\n')]
-                    }),
-                    new Paragraph({
-                        children: [new TextRun(resumeData.workExperience)]
-                    }),
-                    new Paragraph({
-                        children: [new TextRun('\nEDUCATION\n')]
-                    }),
-                    new Paragraph({
-                        children: [new TextRun(resumeData.education)]
-                    }),
-                    new Paragraph({
-                        children: [new TextRun('\nADDITIONAL INFORMATION\n')]
-                    }),
-                    new Paragraph({
-                        children: [new TextRun(resumeData.additionalInfo)]
-                    })
-                ]
-            }]
-        });
-
-        const blob = await Packer.toBlob(doc);
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'resume.docx';
-        link.click();
-        window.URL.revokeObjectURL(url);
-    };
 
     const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -287,12 +192,6 @@ Awards/Activities: Received the "Engineering Excellence" Award for outstanding c
                         handleMenuClose();
                     }}>
                         Download as PDF
-                    </MenuItem>
-                    <MenuItem onClick={() => {
-                        handleDownloadDOCX();
-                        handleMenuClose();
-                    }}>
-                        Download as DOCX
                     </MenuItem>
                 </Menu>
             </Box>
