@@ -22,7 +22,7 @@ const Home: React.FC = () => {
       // thumbnail: 'path-to-thumbnail'
     },
     {
-      id: 'template2',
+      id: 'creative',
       name: 'Creative',
       description: 'A modern and creative template for design and creative roles',
       // thumbnail: 'path-to-thumbnail'
