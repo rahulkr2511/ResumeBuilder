@@ -36,3 +36,78 @@ Languages: English, Malay, German
 Certifications: Professional Engineer (PE) License, Project Management Professional (PMP)
 Awards/Activities: Received the "Engineering Excellence" Award for outstanding contributions to project innovation, Borcelle Technologies`
 }; 
+
+export const defaultResumeStaticCSS = `.resume-container {
+                    background: white !important;
+                    color: black !important;
+                    padding: 20px !important;
+                    width: 100% !important;
+                }
+                .resume-header {
+                    text-align: center !important;
+                    width: 100% !important;
+                    display: flex !important;
+                    justify-content: center !important;
+                    align-items: center !important;
+                    margin: 0 auto !important;
+                }
+                .resume-header div {
+                    font-size: 36px !important;
+                    font-weight: bold !important;
+                    color: #000000 !important;
+                    text-align: center !important;
+                    width: 100% !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    font-family: Arial, sans-serif !important;
+                    display: block !important;
+                }
+                .resume-header .MuiInputBase-root {
+                    width: 100% !important;
+                    text-align: center !important;
+                }
+                .resume-header .MuiInputBase-input {
+                    text-align: center !important;
+                    width: 100% !important;
+                }
+
+                .resume-contact {
+                    text-align: center !important;
+                    width: 100% !important;
+                }
+                .resume-contact div {
+                    text-align: center !important;
+                    color: #555 !important;
+                    font-size: 14px !important;
+                    width: 70% !important;
+                    margin: 0 auto !important;
+                    font-family: Arial, sans-serif !important;
+                    white-space: pre-wrap !important;
+                }
+
+                .resume-section {
+                    margin: 20px 0 !important;
+                    text-align: left !important;
+                }
+                .resume-section h2 {
+                    color: #000000 !important;
+                    font-size: 14px !important;
+                    margin-bottom: 10px !important;
+                    font-weight: bold !important;
+                    text-align: left !important;
+                    padding-left: 0 !important;
+                }
+                .resume-section div {
+                    font-size: 14px !important;
+                    line-height: 1.6 !important;
+                    color: black !important;
+                    background: white !important;
+                    white-space: pre-wrap !important;
+                    text-align: left !important;
+                    font-family: Arial, sans-serif !important;
+                }
+                .resume-divider {
+                    margin: 15px 0 !important;
+                    border-color: #e0e0e0 !important;
+                    border-width: 0.5px !important;
+                }`;

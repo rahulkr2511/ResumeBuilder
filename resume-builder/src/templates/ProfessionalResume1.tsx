@@ -4,7 +4,7 @@ import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import '../styles/ProfessionalResume1.css';
-import { ResumeData, defaultResumeContent } from '../utils/ProfessionalResumeDefaultContent';
+import { ResumeData, defaultResumeContent, defaultResumeStaticCSS } from '../utils/ProfessionalResumeDefaultContent';
 
 const ProfessionalResume1: React.FC = () => {
     const [resumeData, setResumeData] = useState<ResumeData>(defaultResumeContent);
@@ -76,51 +76,8 @@ const ProfessionalResume1: React.FC = () => {
 
             // Add styles for the static content
             const styleElement = document.createElement('style');
-            styleElement.textContent = `
-                .resume-container {
-                    background: white !important;
-                    color: black !important;
-                    padding: 20px !important;
-                    width: 100% !important;
-                }
-                .resume-header {
-                    margin-bottom: 20px !important;
-                }
-                .resume-header div {
-                    font-size: 36px !important;
-                    font-weight: bold !important;
-                    color: #000000 !important;
-                }
-                .resume-contact {
-                    margin-bottom: 20px !important;
-                    font-size: 14px !important;
-                    color: #555 !important;
-                }
-                .resume-section {
-                    margin: 20px 0 !important;
-                    text-align: left !important;
-                }
-                .resume-section h2 {
-                    color: #000000 !important;
-                    font-size: 14px !important;
-                    margin-bottom: 10px !important;
-                    font-weight: bold !important;
-                    text-align: left !important;
-                    padding-left: 0 !important;
-                }
-                .resume-section div {
-                    font-size: 14px !important;
-                    line-height: 1.6 !important;
-                    color: black !important;
-                    background: white !important;
-                    white-space: pre-wrap !important;
-                    text-align: left !important;
-                }
-                .resume-divider {
-                    margin: 15px 0 !important;
-                    border-color: #e0e0e0 !important;
-                    border-width: 0.5px !important;
-                }
+            styleElement.textContent = `${defaultResumeStaticCSS}
+                
             `;
             tempDiv.appendChild(styleElement);
 
@@ -205,7 +162,24 @@ const ProfessionalResume1: React.FC = () => {
                         variant="standard"
                         InputProps={{
                             disableUnderline: true,
-                            style: { fontSize: '36px', fontWeight: 'bold', color: '#000000' },
+                            style: { 
+                                fontSize: '36px', 
+                                fontWeight: 'bold', 
+                                color: '#000000',
+                                textAlign: 'center',
+                                width: '100%'
+                            },
+                        }}
+                        sx={{
+                            width: '100%',
+                            '& .MuiInputBase-root': {
+                                width: '100%',
+                                textAlign: 'center'
+                            },
+                            '& .MuiInputBase-input': {
+                                textAlign: 'center',
+                                width: '100%'
+                            }
                         }}
                     />
                 </div>
@@ -216,9 +190,15 @@ const ProfessionalResume1: React.FC = () => {
                         value={resumeData.contact}
                         onChange={(e) => handleChange("contact", e.target.value)}
                         variant="standard"
+                        className='align-center'
                         InputProps={{
                             disableUnderline: true,
-                            style: { color: '#555', fontSize: '0.9em' },
+                            style: { color: '#555', fontSize: '0.9em', textAlign: 'center', maxWidth:'70%' },
+                        }}
+                        sx={{
+                            '& .MuiInputBase-input': {
+                                textAlign: 'center', 
+                            },
                         }}
                     />
                 </div>
