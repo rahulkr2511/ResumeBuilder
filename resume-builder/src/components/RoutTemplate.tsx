@@ -1,6 +1,6 @@
 import React from 'react';
-import ProfessionalResumeBasic from '../templates/ProfessionalResumeBasic';
 
+const ProfessionalResumeBasic = React.lazy(() => import('../templates/ProfessionalResumeBasic'));
 
 
 const RoutTemplate = (props: any) => {
