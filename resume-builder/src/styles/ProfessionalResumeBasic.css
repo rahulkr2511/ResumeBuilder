@@ -30,7 +30,7 @@
 }
 
 .resume-section h2 {
-    color: #004c99;
+    color: #000000;
     font-size: 1.1em;
     text-align: center;
     margin-bottom: 10px;
@@ -58,39 +58,18 @@
 
 .rich-text-container {
     width: 100%;
-    margin-bottom: 10px;
     position: relative;
 }
 
 .rich-text-editor {
     width: 100%;
-    min-height: 100px;
-    padding: 8px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    outline: none;
     font-family: Arial, sans-serif;
     font-size: 14px;
     line-height: 1.6;
-    background-color: white;
-    transition: border-color 0.2s ease;
-}
-
-.rich-text-editor:focus {
-    border-color: #1976d2;
 }
 
 .rich-text-editor p {
     margin: 0;
-    min-height: 1.5em;
-}
-
-.rich-text-editor p.is-editor-empty:first-child::before {
-    content: attr(data-placeholder);
-    float: left;
-    color: #adb5bd;
-    pointer-events: none;
-    height: 0;
 }
 
 /* Bubble Menu Styles */
@@ -125,26 +104,62 @@
 /* TipTap specific styles */
 .ProseMirror {
     outline: none;
-    min-height: 100px;
 }
 
 .ProseMirror p {
     margin: 0;
 }
 
-.ProseMirror p.is-editor-empty:first-child::before {
-    content: attr(data-placeholder);
-    float: left;
-    color: #adb5bd;
-    pointer-events: none;
-    height: 0;
+/* Heading styles */
+.resume-heading-editor {
+    width: 100%;
+    font-family: Arial, sans-serif;
 }
 
-/* Remove old styles */
-.quill-editor-container,
-.quill-editor-container .ql-container,
-.quill-editor-container .ql-editor,
-.quill-editor-container .ql-toolbar {
-    display: none;
+.resume-heading-editor h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.resume-heading-editor h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.resume-heading-editor p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Ensure the heading styles are preserved in the editor */
+.resume-heading-editor .ProseMirror h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.resume-heading-editor .ProseMirror h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.resume-heading-editor .ProseMirror p {
+    margin: 0;
+    padding: 0;
 }
 
