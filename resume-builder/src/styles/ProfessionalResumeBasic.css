@@ -56,3 +56,95 @@
     align-items: center;
 }
 
+.rich-text-container {
+    width: 100%;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.rich-text-editor {
+    width: 100%;
+    min-height: 100px;
+    padding: 8px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    outline: none;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    background-color: white;
+    transition: border-color 0.2s ease;
+}
+
+.rich-text-editor:focus {
+    border-color: #1976d2;
+}
+
+.rich-text-editor p {
+    margin: 0;
+    min-height: 1.5em;
+}
+
+.rich-text-editor p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: #adb5bd;
+    pointer-events: none;
+    height: 0;
+}
+
+/* Bubble Menu Styles */
+.bubble-menu {
+    display: flex;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+
+.bubble-menu .MuiIconButton-root {
+    padding: 4px;
+    color: #666;
+    transition: color 0.2s ease;
+}
+
+.bubble-menu .MuiIconButton-root:hover {
+    color: #1976d2;
+    background-color: rgba(25, 118, 210, 0.04);
+}
+
+.bubble-menu .MuiIconButton-root.Mui-selected {
+    color: #1976d2;
+    background-color: rgba(25, 118, 210, 0.08);
+}
+
+.bubble-menu .MuiDivider-root {
+    margin: 0 4px;
+}
+
+/* TipTap specific styles */
+.ProseMirror {
+    outline: none;
+    min-height: 100px;
+}
+
+.ProseMirror p {
+    margin: 0;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: #adb5bd;
+    pointer-events: none;
+    height: 0;
+}
+
+/* Remove old styles */
+.quill-editor-container,
+.quill-editor-container .ql-container,
+.quill-editor-container .ql-editor,
+.quill-editor-container .ql-toolbar {
+    display: none;
+}
+

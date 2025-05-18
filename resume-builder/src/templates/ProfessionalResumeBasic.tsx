@@ -1,11 +1,148 @@
 import React, { useState, useRef } from 'react';
-import { TextField, Button, Divider, Box, Menu, MenuItem, IconButton } from '@mui/material';
+import { TextField, Button, Divider, Box, Menu, MenuItem, IconButton, Paper, Tooltip, Select } from '@mui/material';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import FormatBoldIcon from '@mui/icons-material/FormatBold';
+import FormatItalicIcon from '@mui/icons-material/FormatItalic';
+import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined';
+import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
+import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
+import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight';
+import FormatSizeIcon from '@mui/icons-material/FormatSize';
+import { useEditor, EditorContent, BubbleMenu } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import TextAlign from '@tiptap/extension-text-align';
+import Underline from '@tiptap/extension-underline';
+import TextStyle from '@tiptap/extension-text-style';
+import FontSize from '@tiptap/extension-font-size';
 import '../styles/ProfessionalResumeBasic.css';
 import { useNavigate } from 'react-router-dom';
 import { ResumeData, defaultResumeContent, defaultResumeStaticCSS, defaultTextContentCSS } from '../utils/ProfessionalResumeDefaultContent';
+
+const FONT_SIZES = ['8px', '10px', '12px', '14px', '16px', '18px', '20px', '24px', '28px', '32px'];
+
+const RichTextField = ({ value, onChange }: { value: string; onChange: (value: string) => void }) => {
+    const editor = useEditor({
+        extensions: [
+            StarterKit,
+            Underline,
+            TextStyle,
+            FontSize,
+            TextAlign.configure({
+                types: ['heading', 'paragraph'],
+                defaultAlignment: 'left',
+            }),
+        ],
+        content: value,
+        onUpdate: ({ editor }) => {
+            onChange(editor.getHTML());
+        },
+        editorProps: {
+            attributes: {
+                style: 'text-align: left;',
+            },
+        },
+    });
+
+    if (!editor) {
+        return null;
+    }
+
+    const getCurrentFontSize = () => {
+        const fontSize = editor.getAttributes('textStyle').fontSize;
+        return fontSize || '14px';
+    };
+
+    return (
+        <div className="rich-text-container">
+            {editor && (
+                <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }} className="bubble-menu">
+                    <Paper elevation={3} sx={{ display: 'flex', gap: 1, p: 0.5 }}>
+                        <Tooltip title="Bold">
+                            <IconButton
+                                onClick={() => editor.chain().focus().toggleBold().run()}
+                                color={editor.isActive('bold') ? 'primary' : 'default'}
+                                size="small"
+                            >
+                                <FormatBoldIcon fontSize="small" />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Italic">
+                            <IconButton
+                                onClick={() => editor.chain().focus().toggleItalic().run()}
+                                color={editor.isActive('italic') ? 'primary' : 'default'}
+                                size="small"
+                            >
+                                <FormatItalicIcon fontSize="small" />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Underline">
+                            <IconButton
+                                onClick={() => editor.chain().focus().toggleUnderline().run()}
+                                color={editor.isActive('underline') ? 'primary' : 'default'}
+                                size="small"
+                            >
+                                <FormatUnderlinedIcon fontSize="small" />
+                            </IconButton>
+                        </Tooltip>
+                        <Divider orientation="vertical" flexItem />
+                        <Tooltip title="Align Left">
+                            <IconButton
+                                onClick={() => editor.chain().focus().setTextAlign('left').run()}
+                                color={editor.isActive({ textAlign: 'left' }) ? 'primary' : 'default'}
+                                size="small"
+                            >
+                                <FormatAlignLeftIcon fontSize="small" />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Align Center">
+                            <IconButton
+                                onClick={() => editor.chain().focus().setTextAlign('center').run()}
+                                color={editor.isActive({ textAlign: 'center' }) ? 'primary' : 'default'}
+                                size="small"
+                            >
+                                <FormatAlignCenterIcon fontSize="small" />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Align Right">
+                            <IconButton
+                                onClick={() => editor.chain().focus().setTextAlign('right').run()}
+                                color={editor.isActive({ textAlign: 'right' }) ? 'primary' : 'default'}
+                                size="small"
+                            >
+                                <FormatAlignRightIcon fontSize="small" />
+                            </IconButton>
+                        </Tooltip>
+                        <Divider orientation="vertical" flexItem />
+                        <Tooltip title="Font Size">
+                            <Select
+                                value={getCurrentFontSize()}
+                                onChange={(e) => editor.chain().focus().setFontSize(e.target.value).run()}
+                                size="small"
+                                sx={{
+                                    minWidth: 80,
+                                    height: 32,
+                                    '& .MuiSelect-select': {
+                                        py: 0.5,
+                                        px: 1,
+                                    },
+                                }}
+                            >
+                                {FONT_SIZES.map((size) => (
+                                    <MenuItem key={size} value={size} sx={{ fontSize: size }}>
+                                        {size}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </Tooltip>
+                    </Paper>
+                </BubbleMenu>
+            )}
+            <EditorContent editor={editor} className="rich-text-editor" />
+        </div>
+    );
+};
 
 const ProfessionalResumeBasic: React.FC = () => {
     const [resumeData, setResumeData] = useState<ResumeData>(defaultResumeContent);
@@ -14,7 +151,7 @@ const ProfessionalResumeBasic: React.FC = () => {
     const navigate = useNavigate();
 
     const handleChange = (field: keyof ResumeData, value: string) => {
-        setResumeData({ ...resumeData, [field]: value });
+        setResumeData(prev => ({ ...prev, [field]: value }));
     };
 
     const handleSave = () => {
@@ -219,71 +356,43 @@ const ProfessionalResumeBasic: React.FC = () => {
 
                 <div className="resume-section">
                     <h2 style={{ textAlign: 'left', paddingLeft: 0, color: '#000000' }}>SUMMARY</h2>
-                    <TextField
-                        fullWidth
-                        multiline
+                    <RichTextField
                         value={resumeData.summary}
-                        onChange={(e) => handleChange("summary", e.target.value)}
-                        variant="standard"
-                        InputProps={{ 
-                            disableUnderline: true,
-                            style: { textAlign: 'left' }
-                        }}
+                        onChange={(value) => handleChange("summary", value)}
                     />
                 </div>
 
-                <Divider className="resume-divider" sx={{ borderColor: '#e0e0e0', borderWidth: '0.5px' }} />
+                <Divider className="resume-divider" />
 
                 <div className="resume-section">
                     <h2 style={{ textAlign: 'left', paddingLeft: 0, color: '#000000' }}>WORK EXPERIENCE</h2>
-                    <TextField
-                        fullWidth
-                        multiline
+                    <RichTextField
                         value={resumeData.workExperience}
-                        onChange={(e) => handleChange("workExperience", e.target.value)}
-                        variant="standard"
-                        InputProps={{ 
-                            disableUnderline: true,
-                            style: { textAlign: 'left' }
-                        }}
+                        onChange={(value) => handleChange("workExperience", value)}
                     />
                 </div>
 
-                <Divider className="resume-divider" sx={{ borderColor: '#e0e0e0', borderWidth: '0.5px' }} />
+                <Divider className="resume-divider" />
 
                 <div className="resume-section">
                     <h2 style={{ textAlign: 'left', paddingLeft: 0, color: '#000000' }}>EDUCATION</h2>
-                    <TextField
-                        fullWidth
-                        multiline
+                    <RichTextField
                         value={resumeData.education}
-                        onChange={(e) => handleChange("education", e.target.value)}
-                        variant="standard"
-                        InputProps={{ 
-                            disableUnderline: true,
-                            style: { textAlign: 'left' }
-                        }}
+                        onChange={(value) => handleChange("education", value)}
                     />
                 </div>
 
-                <Divider className="resume-divider" sx={{ borderColor: '#e0e0e0', borderWidth: '0.5px' }} />
+                <Divider className="resume-divider" />
 
                 <div className="resume-section">
                     <h2 style={{ textAlign: 'left', paddingLeft: 0, color: '#000000' }}>ADDITIONAL INFORMATION</h2>
-                    <TextField
-                        fullWidth
-                        multiline
+                    <RichTextField
                         value={resumeData.additionalInfo}
-                        onChange={(e) => handleChange("additionalInfo", e.target.value)}
-                        variant="standard"
-                        InputProps={{ 
-                            disableUnderline: true,
-                            style: { textAlign: 'left' }
-                        }}
+                        onChange={(value) => handleChange("additionalInfo", value)}
                     />
                 </div>
 
-                <Divider className="resume-divider" sx={{ borderColor: '#e0e0e0', borderWidth: '0.5px' }} />
+                <Divider className="resume-divider" />
             </div>
         </div>
     );
