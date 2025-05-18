@@ -7,6 +7,8 @@ import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
 import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
 import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight';
 import TitleIcon from '@mui/icons-material/Title';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import { useEditor, EditorContent, BubbleMenu } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import TextAlign from '@tiptap/extension-text-align';
@@ -115,6 +117,25 @@ const RichTextField: React.FC<RichTextFieldProps> = ({ value, onChange, isHeadin
                                 size="small"
                             >
                                 <FormatUnderlinedIcon fontSize="small" />
+                            </IconButton>
+                        </Tooltip>
+                        <Divider orientation="vertical" flexItem />
+                        <Tooltip title="Bullet List">
+                            <IconButton
+                                onClick={() => editor.chain().focus().toggleBulletList().run()}
+                                color={editor.isActive('bulletList') ? 'primary' : 'default'}
+                                size="small"
+                            >
+                                <FormatListBulletedIcon fontSize="small" />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Numbered List">
+                            <IconButton
+                                onClick={() => editor.chain().focus().toggleOrderedList().run()}
+                                color={editor.isActive('orderedList') ? 'primary' : 'default'}
+                                size="small"
+                            >
+                                <FormatListNumberedIcon fontSize="small" />
                             </IconButton>
                         </Tooltip>
                         <Divider orientation="vertical" flexItem />

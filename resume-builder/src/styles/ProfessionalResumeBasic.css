@@ -163,3 +163,49 @@
     padding: 0;
 }
 
+/* List styles */
+.rich-text-editor ul,
+.rich-text-editor ol,
+.resume-heading-editor ul,
+.resume-heading-editor ol {
+    margin: 0;
+    padding-left: 24px;
+}
+
+.rich-text-editor ul li,
+.rich-text-editor ol li,
+.resume-heading-editor ul li,
+.resume-heading-editor ol li {
+    margin: 4px 0;
+}
+
+.rich-text-editor ul li::marker,
+.resume-heading-editor ul li::marker {
+    color: #000000;
+}
+
+.rich-text-editor ol li::marker,
+.resume-heading-editor ol li::marker {
+    color: #000000;
+}
+
+/* Ensure list styles are preserved in the editor */
+.ProseMirror ul,
+.ProseMirror ol {
+    margin: 0;
+    padding-left: 24px;
+}
+
+.ProseMirror ul li,
+.ProseMirror ol li {
+    margin: 4px 0;
+}
+
+.ProseMirror ul li::marker {
+    color: #000000;
+}
+
+.ProseMirror ol li::marker {
+    color: #000000;
+}
+
