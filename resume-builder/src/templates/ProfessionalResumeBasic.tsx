@@ -6,10 +6,15 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import RichTextField from '../utils/RichTextField';
 import '../styles/ProfessionalResumeBasic.css';
 import { useNavigate } from 'react-router-dom';
-import { ResumeData, defaultResumeContent, defaultResumeStaticCSS, defaultTextContentCSS } from '../utils/ProfessionalResumeDefaultContent';
+import { ResumeData, defaultResumeStaticCSS, defaultTextContentCSS } from '../utils/ProfessionalResumeDefaultContent';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProfessionalBasicResumeData, setProfessionalBasicResumeData } from './ProfessionalResumeBasicSlice';
 
 const ProfessionalResumeBasic: React.FC = () => {
-    const [resumeData, setResumeData] = useState<ResumeData>(defaultResumeContent);
+
+    const resumeDataFromStore = useSelector(getProfessionalBasicResumeData);
+    const dispath = useDispatch();
+    const [resumeData, setResumeData] = useState<ResumeData>(resumeDataFromStore);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const resumeRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
@@ -19,7 +24,7 @@ const ProfessionalResumeBasic: React.FC = () => {
     };
 
     const handleSave = () => {
-        // TODO: Create Slice to save the resume data
+        dispath(setProfessionalBasicResumeData(resumeData));
     };
 
     const handleBack = () => {
