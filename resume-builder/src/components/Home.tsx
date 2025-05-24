@@ -65,7 +65,6 @@ const Home: React.FC = () => {
                   <Typography variant="body2" color="text.secondary">
                     {template.description}
                   </Typography>
-                  {/* Add template thumbnail here */}
                   <Box 
                     sx={{ 
                       mt: 2,
@@ -73,12 +72,28 @@ const Home: React.FC = () => {
                       bgcolor: 'grey.200',
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center'
+                      justifyContent: 'center',
+                      overflow: 'hidden',
+                      border: '1px solid #e0e0e0',
+                      borderRadius: '4px',
+                      boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
                     }}
                   >
-                    <Typography variant="body2" color="text.secondary">
-                      {IApplicationConstants.TEMPLATE_PREVIEW}
-                    </Typography>
+                    {template.thumbnail ? (
+                      <img 
+                        src={template.thumbnail} 
+                        alt={`${template.name} preview`}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'contain',
+                        }}
+                      />
+                    ) : (
+                      <Typography variant="body2" color="text.secondary">
+                        {IApplicationConstants.TEMPLATE_PREVIEW}
+                      </Typography>
+                    )}
                   </Box>
                 </CardContent>
               </CardActionArea>

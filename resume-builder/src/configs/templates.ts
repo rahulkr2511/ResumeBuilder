@@ -8,6 +8,7 @@ interface Template {
     id: string;
     name: string;
     description: string;
+    thumbnail?: string;
 }
 
 
@@ -16,13 +17,13 @@ const availableTemplates: Template[] = [
       id: 'professionalBasic',
       name: 'Professional Basic',
       description: 'A clean and professional template suitable for most industries',
-      // thumbnail: 'path-to-thumbnail'
+      thumbnail: 'images/professional-basic-thumbnail.png'
     },
     {
       id: 'creative',
       name: 'Creative',
       description: 'A modern and creative template for design and creative roles',
-      // thumbnail: 'path-to-thumbnail'
+      thumbnail: 'images/creative-basic-thumbnail.png'
     },
 
 
