@@ -2,8 +2,7 @@ import React from 'react';
 
 const ProfessionalResumeBasic = React.lazy(() => import('../templates/ProfessionalResumeBasic'));
 
-
-const RoutTemplate = (props: any) => {
+const RouteTemplate = (props: any) => {
     const { templateId } = props;
     return (
         <>
@@ -13,4 +12,4 @@ const RoutTemplate = (props: any) => {
     );
 }
 
-export default RoutTemplate;
+export default RouteTemplate; 

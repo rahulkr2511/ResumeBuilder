@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, useParams, Navigate } from 'rea
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import Home from './components/Home';
 import ProfessionalResumeBasic from './templates/ProfessionalResumeBasic';
-import RoutTemplate from './components/RoutTemplate';
+import RouteTemplate from './components/RouteTemplate';
 import { Provider } from 'react-redux';
 import store from './store/store';
 
@@ -25,9 +25,9 @@ const theme = createTheme({
 // import store from './store/store';
 
 // Define a wrapper component to use the templateId from the URL
-const RoutTemplateWrapper: React.FC = () => {
+const RouteTemplateWrapper: React.FC = () => {
   const { templateId } = useParams<{ templateId: string }>();
-  return <RoutTemplate templateId={templateId} />;
+  return <RouteTemplate templateId={templateId} />;
 };
 
 const App: React.FC = () => {
@@ -39,7 +39,7 @@ const App: React.FC = () => {
           <div className="App">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/template/:templateId" element={<RoutTemplateWrapper />} />
+              <Route path="/template/:templateId" element={<RouteTemplateWrapper />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </div>
