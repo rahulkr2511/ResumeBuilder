@@ -59,8 +59,8 @@ const ProfessionalResumeBasic: React.FC = () => {
             tempDiv.style.position = 'absolute';
             tempDiv.style.left = '-9999px';
             tempDiv.style.top = '-9999px';
-            tempDiv.style.width = '800px';
-            tempDiv.style.padding = '40px';
+            tempDiv.style.width = '800px';  // Match the resume container width
+            tempDiv.style.padding = '40px';  // Match the resume container padding
             tempDiv.style.background = 'white';
             document.body.appendChild(tempDiv);
             tempDiv.appendChild(resumeClone);
@@ -72,13 +72,13 @@ const ProfessionalResumeBasic: React.FC = () => {
                     if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) {
                         const textContent = field.value;
                         const textDiv = document.createElement('div');
-                        textDiv.innerHTML = textContent; // Use innerHTML to preserve list structure
+                        textDiv.innerHTML = textContent;
                         textDiv.className = field.className;
                         field.parentElement?.replaceWith(textDiv);
                     } else if (field.classList.contains('ProseMirror')) {
                         const content = field.innerHTML;
                         const textDiv = document.createElement('div');
-                        textDiv.innerHTML = content; // Preserve HTML structure including lists
+                        textDiv.innerHTML = content;
                         textDiv.className = field.className;
                         field.parentElement?.replaceWith(textDiv);
                     }
@@ -94,26 +94,34 @@ const ProfessionalResumeBasic: React.FC = () => {
             styleElement.textContent = extractedStyles;
             tempDiv.appendChild(styleElement);
 
-            // Capture the static content
-            const canvas = await html2canvas(tempDiv.firstChild as HTMLElement, {
-                scale: 2,
+            const contentElement = tempDiv.firstChild as HTMLElement;
+            const contentHeight = contentElement?.scrollHeight || 0;
+
+            // Capture the static content with exact dimensions
+            const canvas = await html2canvas(contentElement, {
+                scale: 2,  // Higher scale for better quality
                 useCORS: true,
                 backgroundColor: '#ffffff',
-                logging: false
+                logging: false,
+                width: 800,  // Exact width
+                height: contentHeight,  // Dynamic height
+                windowWidth: 800,  // Match container width
+                windowHeight: contentHeight  // Match content height
             });
 
             // Clean up
             document.body.removeChild(tempDiv);
 
-            // Create PDF
-            const imgData = canvas.toDataURL('image/jpeg', 0.9);
+            // Create PDF with exact dimensions
+            const imgData = canvas.toDataURL('image/jpeg', 1.0);  // Maximum quality
             const pdf = new jsPDF({
                 orientation: 'portrait',
                 unit: 'px',
-                format: [canvas.width / 2, canvas.height / 2]
+                format: [800, canvas.height / 2]  // Exact width, scaled height
             });
 
-            pdf.addImage(imgData, 'JPEG', 0, 0, canvas.width / 2, canvas.height / 2);
+            // Add image with exact width
+            pdf.addImage(imgData, 'JPEG', 0, 0, 800, canvas.height / 2);
             pdf.save('resume.pdf');
 
         } catch (error) {
