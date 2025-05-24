@@ -9,69 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { ProfessionalResumeData } from '../utils/ProfessionalResumeDefaultContent';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfessionalBasicResumeData, setProfessionalBasicResumeData } from './ProfessionalResumeBasicSlice';
-
-const extractComputedStyles = (rootElement: HTMLElement): string => {
-    const allElements = rootElement.querySelectorAll('*');
-    let styleSheet = '';
-
-    // Add base styles for lists
-    styleSheet += `
-        .resume-container ul, .resume-container ol {
-            margin: 0;
-            padding-left: 24px;
-            list-style-position: outside;
-        }
-        .resume-container li {
-            margin: 4px 0;
-            padding-left: 4px;
-            line-height: 1.6;
-            position: relative;
-        }
-        .resume-container ul li {
-            list-style-type: disc;
-        }
-        .resume-container ol {
-            counter-reset: item;
-            list-style-type: none;
-        }
-        .resume-container ol li {
-            counter-increment: item;
-            list-style-type: none;
-            position: relative;
-        }
-        .resume-container ol li::before {
-            content: counter(item) ".";
-            position: absolute;
-            left: -24px;
-            width: 20px;
-            text-align: right;
-        }
-        .resume-container p {
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-    `;
-
-    allElements.forEach((el, index) => {
-        const computed = window.getComputedStyle(el);
-        const className = `static-style-${index}`;
-        el.classList.add(className);
-
-        let styleRule = `.${className} {\n`;
-        Array.from(computed).forEach(prop => {
-            const value = computed.getPropertyValue(prop);
-            // Skip list-style properties as we handle them separately
-            if (value && !prop.startsWith('list-style')) {
-                styleRule += `  ${prop}: ${value};\n`;
-            }
-        });
-        styleRule += '}\n';
-        styleSheet += styleRule;
-    });
-
-    return styleSheet;
-};
+import { useExtractComputedStyles } from '../customHooks/useExtractComputedStyles';
 
 const ProfessionalResumeBasic: React.FC = () => {
     const resumeDataFromStore = useSelector(getProfessionalBasicResumeData);
@@ -80,6 +18,12 @@ const ProfessionalResumeBasic: React.FC = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const resumeRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
+
+    // Custom hook to extract computed styles with resume-specific options
+    const { extractComputedStyles } = useExtractComputedStyles({
+        containerClass: 'resume-container',
+        skipProperties: ['list-style', 'cursor'] // Skip cursor styles for PDF export
+    });
 
     const handleChange = (field: keyof ProfessionalResumeData, value: string) => {
         setResumeData(prev => ({ ...prev, [field]: value }));
