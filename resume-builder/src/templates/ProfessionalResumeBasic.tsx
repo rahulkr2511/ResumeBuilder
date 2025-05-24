@@ -6,25 +6,97 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import RichTextField from '../utils/RichTextField';
 import '../styles/ProfessionalResumeBasic.css';
 import { useNavigate } from 'react-router-dom';
-import { ResumeData, defaultResumeStaticCSS, defaultTextContentCSS } from '../utils/ProfessionalResumeDefaultContent';
+import { ProfessionalResumeData } from '../utils/ProfessionalResumeDefaultContent';
 import { useDispatch, useSelector } from 'react-redux';
-import {  getProfessionalBasicResumeData, setProfessionalBasicResumeData } from './ProfessionalResumeBasicSlice';
+import { getProfessionalBasicResumeData, setProfessionalBasicResumeData } from './ProfessionalResumeBasicSlice';
+
+const extractComputedStyles = (rootElement: HTMLElement): string => {
+    const allElements = rootElement.querySelectorAll('*');
+    let styleSheet = '';
+
+    // Add base styles for lists
+    styleSheet += `
+        .resume-container ul, .resume-container ol {
+            margin: 0;
+            padding-left: 24px;
+            list-style-position: outside;
+        }
+        .resume-container li {
+            margin: 4px 0;
+            padding-left: 4px;
+            line-height: 1.6;
+            position: relative;
+        }
+        .resume-container ul li {
+            list-style-type: disc;
+        }
+        .resume-container ol {
+            counter-reset: item;
+            list-style-type: none;
+        }
+        .resume-container ol li {
+            counter-increment: item;
+            list-style-type: none;
+            position: relative;
+        }
+        .resume-container ol li::before {
+            content: counter(item) ".";
+            position: absolute;
+            left: -24px;
+            width: 20px;
+            text-align: right;
+        }
+        .resume-container p {
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+    `;
+
+    allElements.forEach((el, index) => {
+        const computed = window.getComputedStyle(el);
+        const className = `static-style-${index}`;
+        el.classList.add(className);
+
+        let styleRule = `.${className} {\n`;
+        Array.from(computed).forEach(prop => {
+            const value = computed.getPropertyValue(prop);
+            // Skip list-style properties as we handle them separately
+            if (value && !prop.startsWith('list-style')) {
+                styleRule += `  ${prop}: ${value};\n`;
+            }
+        });
+        styleRule += '}\n';
+        styleSheet += styleRule;
+    });
+
+    return styleSheet;
+};
 
 const ProfessionalResumeBasic: React.FC = () => {
-
     const resumeDataFromStore = useSelector(getProfessionalBasicResumeData);
-    const dispath = useDispatch();
-    const [resumeData, setResumeData] = useState<ResumeData>(resumeDataFromStore);
+    const dispatch = useDispatch();
+    const [resumeData, setResumeData] = useState<ProfessionalResumeData>(resumeDataFromStore);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const resumeRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
 
-    const handleChange = (field: keyof ResumeData, value: string) => {
+    const handleChange = (field: keyof ProfessionalResumeData, value: string) => {
         setResumeData(prev => ({ ...prev, [field]: value }));
     };
 
+    const handleSectionChange = (section: keyof ProfessionalResumeData, field: 'heading' | 'content', value: string) => {
+        setResumeData(prev => ({
+            ...prev,
+            [section]: {
+                ...prev[section],
+                [field]: value
+            }
+        }));
+    };
+
     const handleSave = () => {
-        dispath(setProfessionalBasicResumeData(resumeData));
+        dispatch(setProfessionalBasicResumeData(resumeData));
     };
 
     const handleBack = () => {
@@ -38,7 +110,6 @@ const ProfessionalResumeBasic: React.FC = () => {
         if (buttons) buttons.style.display = 'none';
 
         try {
-            // Create a clone of the resume for PDF generation
             const resumeClone = resumeRef.current.cloneNode(true) as HTMLElement;
             const tempDiv = document.createElement('div');
             tempDiv.style.position = 'absolute';
@@ -50,25 +121,22 @@ const ProfessionalResumeBasic: React.FC = () => {
             document.body.appendChild(tempDiv);
             tempDiv.appendChild(resumeClone);
 
-            // Convert all editable fields to static text so that the whole content will be visible
+            // Convert all editable fields to static text
             const convertToStaticText = (element: HTMLElement) => {
-                const textFields = element.querySelectorAll('.MuiInputBase-input');
+                const textFields = element.querySelectorAll('.MuiInputBase-input, .ProseMirror');
                 textFields.forEach((field: Element) => {
                     if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) {
                         const textContent = field.value;
                         const textDiv = document.createElement('div');
-                        textDiv.style.cssText = `
-                            ${defaultTextContentCSS}
-                        `;
-                        textDiv.textContent = textContent;
-                        
-                        // Replace the input with the static text div
-                        const parent = field.parentElement;
-                        if (parent) {
-                            // Preserve the original styling classes
-                            textDiv.className = parent.className;
-                            parent.replaceWith(textDiv);
-                        }
+                        textDiv.innerHTML = textContent; // Use innerHTML to preserve list structure
+                        textDiv.className = field.className;
+                        field.parentElement?.replaceWith(textDiv);
+                    } else if (field.classList.contains('ProseMirror')) {
+                        const content = field.innerHTML;
+                        const textDiv = document.createElement('div');
+                        textDiv.innerHTML = content; // Preserve HTML structure including lists
+                        textDiv.className = field.className;
+                        field.parentElement?.replaceWith(textDiv);
                     }
                 });
             };
@@ -76,11 +144,10 @@ const ProfessionalResumeBasic: React.FC = () => {
             // Convert all editable fields to static text
             convertToStaticText(resumeClone);
 
-            // Add styles for the static content
+            // Extract computed styles and create style element
+            const extractedStyles = extractComputedStyles(resumeClone);
             const styleElement = document.createElement('style');
-            styleElement.textContent = `${defaultResumeStaticCSS}
-                
-            `;
+            styleElement.textContent = extractedStyles;
             tempDiv.appendChild(styleElement);
 
             // Capture the static content
@@ -174,8 +241,8 @@ const ProfessionalResumeBasic: React.FC = () => {
             <div className="resume-container" ref={resumeRef}>
                 <div className="resume-header">
                     <RichTextField
-                        value={resumeData.name}
-                        onChange={(value) => handleChange("name", value)}
+                        value={resumeData.name.content}
+                        onChange={(value) => handleSectionChange("name", "content", value)}
                         isHeading={true}
                     />
                 </div>
@@ -183,19 +250,29 @@ const ProfessionalResumeBasic: React.FC = () => {
                     <TextField
                         fullWidth
                         multiline
-                        value={resumeData.contact}
-                        onChange={(e) => handleChange("contact", e.target.value)}
+                        value={resumeData.contact.content}
+                        onChange={(e) => handleSectionChange("contact", "content", e.target.value)}
                         variant="standard"
-                        className='align-center'
                         InputProps={{
                             disableUnderline: true,
-                            style: { color: '#555', fontSize: '0.9em', textAlign: 'center', maxWidth:'70%' },
-                        }}
-                        sx={{
-                            '& .MuiInputBase-input': {
-                                textAlign: 'center', 
+                            style: { 
+                                color: '#555', 
+                                fontSize: '0.9em', 
+                                textAlign: 'center',
+                                fontFamily: 'Arial, sans-serif',
+                                whiteSpace: 'pre-wrap'
                             },
                         }}
+                        sx={{
+                            '& .MuiInputBase-root': {
+                                width: '70%',
+                                margin: '0 auto'
+                            },
+                            '& .MuiInputBase-input': {
+                                textAlign: 'center',
+                                padding: '0'
+                            }
+                        }}
                     />
                 </div>
 
@@ -203,13 +280,13 @@ const ProfessionalResumeBasic: React.FC = () => {
 
                 <div className="resume-section">
                     <RichTextField
-                        value="<h2>SUMMARY</h2>"
-                        onChange={(value) => {/* We don't need to save the heading as it's static */}}
+                        value={`<h2>${resumeData.summary.heading}</h2>`}
+                        onChange={(value) => handleSectionChange("summary", "heading", value.replace(/<[^>]*>/g, ''))}
                         isHeading={true}
                     />
                     <RichTextField
-                        value={resumeData.summary}
-                        onChange={(value) => handleChange("summary", value)}
+                        value={resumeData.summary.content}
+                        onChange={(value) => handleSectionChange("summary", "content", value)}
                     />
                 </div>
 
@@ -217,13 +294,13 @@ const ProfessionalResumeBasic: React.FC = () => {
 
                 <div className="resume-section">
                     <RichTextField
-                        value="<h2>WORK EXPERIENCE</h2>"
-                        onChange={(value) => {/* We don't need to save the heading as it's static */}}
+                        value={`<h2>${resumeData.workExperience.heading}</h2>`}
+                        onChange={(value) => handleSectionChange("workExperience", "heading", value.replace(/<[^>]*>/g, ''))}
                         isHeading={true}
                     />
                     <RichTextField
-                        value={resumeData.workExperience}
-                        onChange={(value) => handleChange("workExperience", value)}
+                        value={resumeData.workExperience.content}
+                        onChange={(value) => handleSectionChange("workExperience", "content", value)}
                     />
                 </div>
 
@@ -231,13 +308,13 @@ const ProfessionalResumeBasic: React.FC = () => {
 
                 <div className="resume-section">
                     <RichTextField
-                        value="<h2>EDUCATION</h2>"
-                        onChange={(value) => {/* We don't need to save the heading as it's static */}}
+                        value={`<h2>${resumeData.education.heading}</h2>`}
+                        onChange={(value) => handleSectionChange("education", "heading", value.replace(/<[^>]*>/g, ''))}
                         isHeading={true}
                     />
                     <RichTextField
-                        value={resumeData.education}
-                        onChange={(value) => handleChange("education", value)}
+                        value={resumeData.education.content}
+                        onChange={(value) => handleSectionChange("education", "content", value)}
                     />
                 </div>
 
@@ -245,13 +322,13 @@ const ProfessionalResumeBasic: React.FC = () => {
 
                 <div className="resume-section">
                     <RichTextField
-                        value="<h2>ADDITIONAL INFORMATION</h2>"
-                        onChange={(value) => {/* We don't need to save the heading as it's static */}}
+                        value={`<h2>${resumeData.additionalInfo.heading}</h2>`}
+                        onChange={(value) => handleSectionChange("additionalInfo", "heading", value.replace(/<[^>]*>/g, ''))}
                         isHeading={true}
                     />
                     <RichTextField
-                        value={resumeData.additionalInfo}
-                        onChange={(value) => handleChange("additionalInfo", value)}
+                        value={resumeData.additionalInfo.content}
+                        onChange={(value) => handleSectionChange("additionalInfo", "content", value)}
                     />
                 </div>
 

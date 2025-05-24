@@ -41,6 +41,23 @@
     font-size: 0.9em;
     color: #555;
     word-wrap: break-word;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.resume-contact .MuiInputBase-root {
+    width: 70% !important;
+    margin: 0 auto;
+}
+
+.resume-contact .MuiInputBase-input {
+    text-align: center !important;
+    color: #555 !important;
+    font-size: 0.9em !important;
+    font-family: Arial, sans-serif !important;
+    white-space: pre-wrap !important;
 }
 
 .resume-text {
