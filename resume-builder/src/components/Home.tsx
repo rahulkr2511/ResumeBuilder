@@ -1,87 +1,108 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Container, Typography, Stack, Card, CardContent, CardActionArea } from '@mui/material';
-import availableTemplates from '../configs/templates'; 
+import {
+  Box,
+  Container,
+  Typography,
+  Stack,
+  Card,
+  CardContent,
+  CardActionArea,
+} from '@mui/material';
+import availableTemplates from '../configs/templates';
 import IApplicationConstants from '../constants/Constants';
 
-/**
- * 
- * @returns The Home component displays a list of available resume templates
- *         and allows users to select one to start building their resume.
- */
-
 const Home: React.FC = () => {
-
   const navigate = useNavigate();
+
   const handleTemplateSelect = (templateId: string) => {
     navigate(`/template/${templateId}`);
   };
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Typography variant="h3" component="h1" gutterBottom align="center">
-        {IApplicationConstants.APP_NAME}
-      </Typography>
-      <Typography variant="h5" component="h2" gutterBottom align="center" color="text.secondary">
-        {IApplicationConstants.APP_DESCRIPTION}
-      </Typography>
-      <Typography variant="h5" component="h2" gutterBottom align="center" color="text.secondary">
-        {IApplicationConstants.CHOOSE_TEMPLATE_DESCRIPTION}
-      </Typography>
+    <Box
+      sx={{
+        minHeight: '100vh',
+        background: 'linear-gradient(to bottom right, #f8fafc, #ffffff)',
+        py: { xs: 6, md: 10 },
+      }}
+    >
+      <Container maxWidth="lg">
+        <Box textAlign="center" mb={6}>
+          <Typography
+            variant="h3"
+            component="h1"
+            fontWeight="bold"
+            gutterBottom
+            sx={{ color: 'primary.main' }}
+          >
+            {IApplicationConstants.APP_NAME}
+          </Typography>
+          <Typography variant="h6" color="text.secondary" gutterBottom>
+            {IApplicationConstants.APP_DESCRIPTION}
+          </Typography>
+          <Typography variant="subtitle1" color="text.secondary">
+            {IApplicationConstants.CHOOSE_TEMPLATE_DESCRIPTION}
+          </Typography>
+        </Box>
 
-      <Box sx={{ mt: 2 }}>
-        <Stack 
-          direction={{ xs: 'column', sm: 'row' }} 
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
           spacing={4}
-          sx={{ 
+          sx={{
             display: 'grid',
             gridTemplateColumns: {
               xs: '1fr',
               sm: 'repeat(2, 1fr)',
-              md: 'repeat(3, 1fr)'
+              md: 'repeat(3, 1fr)',
             },
-            gap: 4
+            gap: 4,
           }}
         >
           {availableTemplates.map((template) => (
-            <Card 
+            <Card
               key={template.id}
-              sx={{ 
-                height: '100%',
+              elevation={2}
+              sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                transition: 'transform 0.2s',
+                transition: 'transform 0.25s ease, box-shadow 0.25s ease',
                 '&:hover': {
-                  transform: 'scale(1.02)',
-                  boxShadow: 3
-                }
+                  transform: 'scale(1.03)',
+                  boxShadow: 6,
+                },
               }}
             >
               <CardActionArea onClick={() => handleTemplateSelect(template.id)}>
                 <CardContent>
-                  <Typography variant="h5" component="h2" gutterBottom>
+                  <Typography
+                    variant="h6"
+                    fontWeight={600}
+                    gutterBottom
+                    color="text.primary"
+                  >
                     {template.name}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                     {template.description}
                   </Typography>
-                  <Box 
-                    sx={{ 
-                      mt: 2,
+
+                  <Box
+                    sx={{
+                      mt: 3,
                       height: 200,
-                      bgcolor: 'grey.200',
+                      backgroundColor: 'grey.100',
+                      borderRadius: 2,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       overflow: 'hidden',
-                      border: '1px solid #e0e0e0',
-                      borderRadius: '4px',
-                      boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+                      border: '1px solid #ddd',
                     }}
                   >
                     {template.thumbnail ? (
-                      <img 
-                        src={template.thumbnail} 
+                      <img
+                        src={template.thumbnail}
                         alt={`${template.name} preview`}
                         style={{
                           width: '100%',
@@ -100,9 +121,19 @@ const Home: React.FC = () => {
             </Card>
           ))}
         </Stack>
-      </Box>
-    </Container>
+
+        <Typography
+          variant="caption"
+          color="text.disabled"
+          textAlign="center"
+          mt={6}
+          display="block"
+        >
+          {IApplicationConstants.FOOT_NOTE}
+        </Typography>
+      </Container>
+    </Box>
   );
 };
 
-export default Home; 
+export default React.memo(Home);

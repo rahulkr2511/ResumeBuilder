@@ -1,4 +1,5 @@
 import React from 'react';
+import { ITemplateIds } from '../configs/templates';
 
 /**
  * * RouteTemplate component dynamically loads and renders the appropriate resume template
@@ -9,13 +10,17 @@ import React from 'react';
 
 const ProfessionalResumeBasic = React.lazy(() => import('../templates/Professional/ProfessionalResumeBasic'));
 const CreativeResumeBasic = React.lazy(() => import('../templates/Creative/CreativeResumeBasic'));
+const BusinessResumeBasic = React.lazy(() => import('../templates/Business/BusinessResumeBasic'));  
+
 
 const RouteTemplate = (props: any) => {
     const { templateId } = props;
     return (
         <>
-            {templateId === 'professionalBasic' && <ProfessionalResumeBasic />}
-            {templateId === 'creative' && <CreativeResumeBasic />}
+            {templateId === ITemplateIds.PROFESSIONAL_BASIC && <ProfessionalResumeBasic />}
+            {templateId === ITemplateIds.CREATIVE_BASIC && <CreativeResumeBasic />}
+            {templateId === ITemplateIds.BUSINESS_BASIC && <BusinessResumeBasic />}
+            {/* Add more templates as needed */}
         </>
     );
 }

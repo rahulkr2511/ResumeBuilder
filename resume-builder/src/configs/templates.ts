@@ -11,19 +11,31 @@ interface Template {
     thumbnail?: string;
 }
 
+export const ITemplateIds = {
+    PROFESSIONAL_BASIC: 'professionalBasic',
+    CREATIVE_BASIC: 'creativeBasic',
+    BUSINESS_BASIC: 'businessBasic',        
+}
+
 
 const availableTemplates: Template[] = [
     {
-      id: 'professionalBasic',
+      id: ITemplateIds.PROFESSIONAL_BASIC,
       name: 'Professional Basic',
       description: 'A clean and professional template suitable for most industries',
       thumbnail: 'images/professional-basic-thumbnail.png'
     },
     {
-      id: 'creative',
-      name: 'Creative',
+      id: ITemplateIds.CREATIVE_BASIC,
+      name: 'Creative Basic',
       description: 'A modern and creative template for design and creative roles',
       thumbnail: 'images/creative-basic-thumbnail.png'
+    },
+    {
+      id: ITemplateIds.BUSINESS_BASIC,
+      name: 'Business Basic',
+      description: 'A sophisticated template designed for business professionals and executives',
+      thumbnail: 'images/business-basic-thumbnail.png'
     },
 
 

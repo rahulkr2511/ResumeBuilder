@@ -3,14 +3,16 @@
  */
 const IApplicationConstants = {
   
-  APP_NAME: 'Resumer Builder',
+  APP_NAME: 'CraftMyCV',
   APP_VERSION: '1.0.0',
-  APP_DESCRIPTION: 'A modern resume builder to create professional resumes effortlessly.',
+  APP_DESCRIPTION: 'Create sleek, standout resumes in minutes — pick a design, tailor your content, and make your mark',
   APP_AUTHOR: 'Your Name',
   APP_AUTHOR_EMAIL: '',
 
   CHOOSE_TEMPLATE_DESCRIPTION: 'Choose a template to get started',
-  TEMPLATE_PREVIEW: 'Template Preview'
+  TEMPLATE_PREVIEW: 'Template Preview',
+
+  FOOT_NOTE: 'Build, customize, and download for free 🚀'
 
 };
 export default IApplicationConstants;
