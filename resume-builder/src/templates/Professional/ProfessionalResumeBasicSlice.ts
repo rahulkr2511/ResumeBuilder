@@ -1,4 +1,4 @@
-import { defaultResumeContent, ProfessionalResumeData } from "../utils/ProfessionalResumeDefaultContent";
+import { defaultResumeContent, ProfessionalResumeData } from "../../utils/ProfessionalResumeDefaultContent";
 import { createSlice } from "@reduxjs/toolkit";
 
 

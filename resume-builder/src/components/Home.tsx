@@ -1,34 +1,17 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Container, Typography, Stack, Card, CardContent, CardActionArea } from '@mui/material';
-
+import availableTemplates from '../configs/templates'; // Adjust the path as necessary
+// Import the templates configuration file
 // Template components will be imported here
 // import Template1 from '../templates/Template1';
 
-interface Template {
-  id: string;
-  name: string;
-  description: string;
-}
+
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
 
-  const templates: Template[] = [
-    {
-      id: 'professionalBasic',
-      name: 'Professional Basic',
-      description: 'A clean and professional template suitable for most industries',
-      // thumbnail: 'path-to-thumbnail'
-    },
-    {
-      id: 'creative',
-      name: 'Creative',
-      description: 'A modern and creative template for design and creative roles',
-      // thumbnail: 'path-to-thumbnail'
-    },
-    // Add more templates as needed
-  ];
+
 
   const handleTemplateSelect = (templateId: string) => {
     navigate(`/template/${templateId}`);
@@ -57,7 +40,7 @@ const Home: React.FC = () => {
             gap: 4
           }}
         >
-          {templates.map((template) => (
+          {availableTemplates.map((template) => (
             <Card 
               key={template.id}
               sx={{ 

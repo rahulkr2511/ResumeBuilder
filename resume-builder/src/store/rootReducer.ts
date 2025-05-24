@@ -1,5 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import professionalBasicReducer from "../templates/ProfessionalResumeBasicSlice";
+import professionalBasicReducer from "../templates/Professional/ProfessionalResumeBasicSlice";
 
 
 const appReducer = combineReducers({

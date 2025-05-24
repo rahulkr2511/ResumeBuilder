@@ -3,7 +3,6 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route, useParams, Navigate } from 'react-router-dom';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import Home from './components/Home';
-import ProfessionalResumeBasic from './templates/ProfessionalResumeBasic';
 import RouteTemplate from './components/RouteTemplate';
 import { Provider } from 'react-redux';
 import store from './store/store';

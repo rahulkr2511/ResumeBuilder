@@ -3,13 +3,13 @@ import { TextField, Button, Divider, Box, Menu, MenuItem, IconButton } from '@mu
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import RichTextField from '../utils/RichTextField';
-import '../styles/ProfessionalResumeBasic.css';
+import RichTextField from '../../utils/RichTextField';
+import '../../styles/ProfessionalResumeBasic.css';
 import { useNavigate } from 'react-router-dom';
-import { ProfessionalResumeData } from '../utils/ProfessionalResumeDefaultContent';
+import { ProfessionalResumeData } from '../../utils/ProfessionalResumeDefaultContent';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfessionalBasicResumeData, setProfessionalBasicResumeData } from './ProfessionalResumeBasicSlice';
-import { useExtractComputedStyles } from '../customHooks/useExtractComputedStyles';
+import { useExtractComputedStyles } from '../../customHooks/useExtractComputedStyles';
 
 const ProfessionalResumeBasic: React.FC = () => {
     const resumeDataFromStore = useSelector(getProfessionalBasicResumeData);
