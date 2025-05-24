@@ -12,6 +12,15 @@ import {
 import availableTemplates from '../configs/templates';
 import IApplicationConstants from '../constants/Constants';
 
+/**
+ * This is the home page of the application.
+ * It displays the available templates and allows the user to select a template.
+ * It also displays the app name and description.
+ * It also displays the foot note.
+ * 
+ * @returns Home page component
+ */
+
 const Home: React.FC = () => {
   const navigate = useNavigate();
 
