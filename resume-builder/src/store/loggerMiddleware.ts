@@ -1,16 +1,26 @@
 
 import { Middleware } from 'redux';
 
-// This middleware logs Redux actions and state changes to the console.
-// There logging is enabled by default, but can be disabled by setting `loggerConfig.enabled` to false.
-// The logs are stored in the `window.__REDUX_LOGS__` array, which can be accessed for debugging purposes.
-// The logs include the timestamp, action, previous state, and next state.
-// The same functionality is also available in logger packages like redux-logger.
+/**
+ * 
+ * Redux logger middleware
+ * 
+ * This middleware logs Redux actions and state changes to the console.
+ * It is useful for debugging and tracking state changes in the application.
+ * The logs are stored in the `window.__REDUX_LOGS__` array, which can be accessed for debugging purposes.
+ * The logs include the timestamp, action, previous state, and next state.
+ * The same functionality is also available in logger packages like redux-logger.
+ * There logging is enabled by default, but can be disabled by setting `loggerConfig.enabled` to false
+ * 
+ */
 
 
 export const loggerConfig = {
-    // Set to false to disable logging
+    /* *
+     Set to false to disable logging
+     * */
     enabled: true
+    
   };
 
   

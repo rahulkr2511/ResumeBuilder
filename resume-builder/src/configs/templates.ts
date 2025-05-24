@@ -1,4 +1,9 @@
 
+/**
+ * This file contains the configuration for available resume templates.
+ * And any other configuration related to templates can be added here.
+ */
+
 interface Template {
     id: string;
     name: string;

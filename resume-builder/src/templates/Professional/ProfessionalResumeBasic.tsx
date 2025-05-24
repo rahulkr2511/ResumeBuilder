@@ -11,6 +11,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProfessionalBasicResumeData, setProfessionalBasicResumeData } from './ProfessionalResumeBasicSlice';
 import { useExtractComputedStyles } from '../../customHooks/useExtractComputedStyles';
 
+/**
+ * 
+ * @returns The ProfessionalResumeBasic component renders a professional resume template
+ *          allowing users to edit their resume details, save changes, and download it as a PDF.
+ *         It uses Material-UI for styling and layout, and integrates with Redux for state management.
+ *         The component includes features like rich text editing, dynamic section handling,
+ *         and PDF generation with exact dimensions and styles.
+ */
+
 const ProfessionalResumeBasic: React.FC = () => {
     const resumeDataFromStore = useSelector(getProfessionalBasicResumeData);
     const dispatch = useDispatch();
@@ -19,16 +28,15 @@ const ProfessionalResumeBasic: React.FC = () => {
     const resumeRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
 
-    // Custom hook to extract computed styles with resume-specific options
+    /**
+     * * Custom hook to extract computed styles from the resume container
+     */
     const { extractComputedStyles } = useExtractComputedStyles({
         containerClass: 'resume-container',
         skipProperties: ['list-style', 'cursor'] // Skip cursor styles for PDF export
     });
 
-    const handleChange = (field: keyof ProfessionalResumeData, value: string) => {
-        setResumeData(prev => ({ ...prev, [field]: value }));
-    };
-
+    
     const handleSectionChange = (section: keyof ProfessionalResumeData, field: 'heading' | 'content', value: string) => {
         setResumeData(prev => ({
             ...prev,
@@ -65,7 +73,16 @@ const ProfessionalResumeBasic: React.FC = () => {
             document.body.appendChild(tempDiv);
             tempDiv.appendChild(resumeClone);
 
-            // Convert all editable fields to static text
+            /**
+             * 
+             * @param element HTMLElement
+             * This function converts all editable text fields in the resume to static text.
+             * It replaces input and textarea elements with divs containing their text content.
+             * This is necessary to ensure that the PDF captures the text as static content
+             * and not as editable fields, which can cause issues in the PDF rendering. 
+             * 
+             */
+
             const convertToStaticText = (element: HTMLElement) => {
                 const textFields = element.querySelectorAll('.MuiInputBase-input, .ProseMirror');
                 textFields.forEach((field: Element) => {
@@ -85,10 +102,11 @@ const ProfessionalResumeBasic: React.FC = () => {
                 });
             };
 
-            // Convert all editable fields to static text
             convertToStaticText(resumeClone);
 
-            // Extract computed styles and create style element
+            /**
+             * * This function extracts computed styles from the cloned resume element.
+             */
             const extractedStyles = extractComputedStyles(resumeClone);
             const styleElement = document.createElement('style');
             styleElement.textContent = extractedStyles;
@@ -97,7 +115,16 @@ const ProfessionalResumeBasic: React.FC = () => {
             const contentElement = tempDiv.firstChild as HTMLElement;
             const contentHeight = contentElement?.scrollHeight || 0;
 
-            // Capture the static content with exact dimensions
+            /**
+             * * html2canvas is used to render the content element to a canvas.
+             * * It captures the content with a higher scale for better quality (2),
+             * * and sets the background color to white.
+             * * The width is set to 800px (exact width of component), and the height is dynamically calculated based on the content.
+             * * The canvas is then converted to a JPEG image with maximum quality.
+             * * Finally, jsPDF is used to create a PDF document with the exact dimensions,
+             * * and the image is added to the PDF.
+             * * The PDF is then saved with the filename 'resume.pdf' by default.
+             */
             const canvas = await html2canvas(contentElement, {
                 scale: 2,  // Higher scale for better quality
                 useCORS: true,
@@ -111,8 +138,7 @@ const ProfessionalResumeBasic: React.FC = () => {
 
             // Clean up
             document.body.removeChild(tempDiv);
-
-            // Create PDF with exact dimensions
+            
             const imgData = canvas.toDataURL('image/jpeg', 1.0);  // Maximum quality
             const pdf = new jsPDF({
                 orientation: 'portrait',

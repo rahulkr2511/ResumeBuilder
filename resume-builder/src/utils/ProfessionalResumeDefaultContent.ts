@@ -1,3 +1,13 @@
+/**
+ * Content constants for a professional resume template.
+ * This file defines the default content structure and values for a professional resume.
+ * It includes sections like name, contact, summary, work experience, education, and additional information.
+ * Each section contains a heading and content, which can be customized as needed.
+ * The default content is structured to provide a comprehensive overview of the candidate's qualifications and experience.
+ * This content can be used as a starting point for creating a professional resume.
+ */
+
+
 export interface ProfessionalResumeData {
     name: {
         heading: string;

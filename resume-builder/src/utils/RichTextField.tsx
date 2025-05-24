@@ -19,6 +19,14 @@ import FontSize from '@tiptap/extension-font-size';
 import Color from '@tiptap/extension-color';
 import '../styles/ProfessionalResumeBasic.css';
 
+/**
+ * This component provides a rich text editor with formatting options
+ * such as bold, italic, underline, text alignment, font size, and color.
+ * It is designed for use in a resume builder application, allowing users
+ * to create and style text content easily.
+ */
+
+
 const FONT_SIZES = ['8px', '10px', '12px', '14px', '16px', '18px', '20px', '24px', '28px', '32px'];
 const COLORS = [
     '#000000', // Black

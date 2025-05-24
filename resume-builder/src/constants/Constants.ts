@@ -1,6 +1,8 @@
-
+/**
+ * Constants for the Resumer Builder application
+ */
 const IApplicationConstants = {
-  // Application Constants
+  
   APP_NAME: 'Resumer Builder',
   APP_VERSION: '1.0.0',
   APP_DESCRIPTION: 'A modern resume builder to create professional resumes effortlessly.',
