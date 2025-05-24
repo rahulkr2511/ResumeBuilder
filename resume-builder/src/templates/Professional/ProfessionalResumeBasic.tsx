@@ -290,4 +290,4 @@ const ProfessionalResumeBasic: React.FC = () => {
     );
 };
 
-export default ProfessionalResumeBasic;
+export default React.memo(ProfessionalResumeBasic);

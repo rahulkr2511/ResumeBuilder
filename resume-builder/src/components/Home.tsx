@@ -1,18 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Container, Typography, Stack, Card, CardContent, CardActionArea } from '@mui/material';
-import availableTemplates from '../configs/templates'; // Adjust the path as necessary
-// Import the templates configuration file
-// Template components will be imported here
-// import Template1 from '../templates/Template1';
+import availableTemplates from '../configs/templates'; 
+import IApplicationConstants from '../constants/Constants';
 
-
+/**
+ * 
+ * @returns The Home component displays a list of available resume templates
+ *         and allows users to select one to start building their resume.
+ */
 
 const Home: React.FC = () => {
+
   const navigate = useNavigate();
-
-
-
   const handleTemplateSelect = (templateId: string) => {
     navigate(`/template/${templateId}`);
   };
@@ -20,10 +20,13 @@ const Home: React.FC = () => {
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <Typography variant="h3" component="h1" gutterBottom align="center">
-        Resume Builder
+        {IApplicationConstants.APP_NAME}
       </Typography>
       <Typography variant="h5" component="h2" gutterBottom align="center" color="text.secondary">
-        Choose a template to get started
+        {IApplicationConstants.APP_DESCRIPTION}
+      </Typography>
+      <Typography variant="h5" component="h2" gutterBottom align="center" color="text.secondary">
+        {IApplicationConstants.CHOOSE_TEMPLATE_DESCRIPTION}
       </Typography>
 
       <Box sx={{ mt: 2 }}>
@@ -74,7 +77,7 @@ const Home: React.FC = () => {
                     }}
                   >
                     <Typography variant="body2" color="text.secondary">
-                      Template Preview
+                      {IApplicationConstants.TEMPLATE_PREVIEW}
                     </Typography>
                   </Box>
                 </CardContent>

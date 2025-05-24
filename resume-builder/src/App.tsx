@@ -19,15 +19,17 @@ const theme = createTheme({
   },
 });
 
-// Create a provider for the redux store
-// import { Provider } from 'react-redux';
-// import store from './store/store';
 
-// Define a wrapper component to use the templateId from the URL
+/**
+ * 
+ * @returns A wrapper component that retrieves the templateId from the URL parameters
+ */
 const RouteTemplateWrapper: React.FC = () => {
   const { templateId } = useParams<{ templateId: string }>();
   return <RouteTemplate templateId={templateId} />;
 };
+
+
 
 const App: React.FC = () => {
   return (
