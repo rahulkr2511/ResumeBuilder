@@ -11,6 +11,11 @@ const IApplicationConstants = {
 
   CHOOSE_TEMPLATE_DESCRIPTION: 'Choose a template to get started',
   TEMPLATE_PREVIEW: 'Template Preview',
+  BACK: 'Back',
+  NEXT: 'Next',
+  APPLY_CHANGES: 'Apply Changes',
+  DOWNLOAD_AS_PDF: 'Download as PDF',
+  RESET_CHANGES: 'Reset Changes',
 
   FOOT_NOTE: 'Build, customize, and download for free 🚀'
 

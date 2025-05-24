@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, use } from 'react';
 import { TextField, Button, Divider, Box, Menu, MenuItem, IconButton } from '@mui/material';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -8,8 +8,9 @@ import '../../styles/ProfessionalResumeBasic.css';
 import { useNavigate } from 'react-router-dom';
 import { ProfessionalResumeData } from '../../utils/ProfessionalResumeDefaultContent';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProfessionalBasicResumeData, setProfessionalBasicResumeData } from './ProfessionalResumeBasicSlice';
+import { getProfessionalBasicResumeData, resetProfessionalBasicResumeData, setProfessionalBasicResumeData } from './ProfessionalResumeBasicSlice';
 import { useExtractComputedStyles } from '../../customHooks/useExtractComputedStyles';
+import IApplicationConstants from '../../constants/Constants';
 
 /**
  * 
@@ -35,6 +36,7 @@ const ProfessionalResumeBasic: React.FC = () => {
         containerClass: 'resume-container',
         skipProperties: ['list-style', 'cursor'] // Skip cursor styles for PDF export
     });
+
 
     
     const handleSectionChange = (section: keyof ProfessionalResumeData, field: 'heading' | 'content', value: string) => {
@@ -181,7 +183,7 @@ const ProfessionalResumeBasic: React.FC = () => {
                     color="primary" 
                     onClick={handleBack}
                 >
-                    Back
+                    {IApplicationConstants.BACK}
                 </Button>
             </Box>
             <Box className="resume-actions" sx={{ 
@@ -197,7 +199,7 @@ const ProfessionalResumeBasic: React.FC = () => {
                     color="primary" 
                     onClick={handleSave}
                 >
-                    Apply Changes
+                    {IApplicationConstants.APPLY_CHANGES}
                 </Button>
                 <IconButton onClick={handleMenuClick}>
                     <MoreVertIcon />
@@ -211,7 +213,7 @@ const ProfessionalResumeBasic: React.FC = () => {
                         handleDownloadPDF();
                         handleMenuClose();
                     }}>
-                        Download as PDF
+                        {IApplicationConstants.DOWNLOAD_AS_PDF}
                     </MenuItem>
                 </Menu>
             </Box>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useExtractComputedStyles } from '../../customHooks/useExtractComputedStyles';
 import { Box, Button, IconButton, Menu, MenuItem } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import IApplicationConstants from '../../constants/Constants';
 
 
 
@@ -50,7 +51,7 @@ const BusinessResumeBasic = () => {
                     color="primary" 
                     onClick={handleBack}
                 >
-                    Back
+                    {IApplicationConstants.BACK}    
                 </Button>
             </Box>
             <Box className="resume-actions" sx={{ 
@@ -66,7 +67,7 @@ const BusinessResumeBasic = () => {
                     color="primary" 
                     // onClick={handleSave}
                 >
-                    Apply Changes
+                   {IApplicationConstants.APPLY_CHANGES}
                 </Button>
                 <IconButton onClick={handleMenuClick}>
                     <MoreVertIcon />
@@ -80,7 +81,7 @@ const BusinessResumeBasic = () => {
                         // handleDownloadPDF();
                         handleMenuClose();
                     }}>
-                        Download as PDF
+                        {IApplicationConstants.DOWNLOAD_AS_PDF}
                     </MenuItem>
                 </Menu>
             </Box>
