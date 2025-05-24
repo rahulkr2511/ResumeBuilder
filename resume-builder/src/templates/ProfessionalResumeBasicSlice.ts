@@ -1,36 +1,43 @@
 import { defaultResumeContent, ResumeData } from "../utils/ProfessionalResumeDefaultContent";
+import { createSlice } from "@reduxjs/toolkit";
 
+
+/*
+    This slice is used to manage the state of the professional resume builder.
+    It contains the initial state, reducers, and actions for the resume data.
+    The initial state is set to the default resume content.
+    The reducers are used to set and reset the resume data.
+    The actions are used to dispatch the reducers.
+    Entire slice is created using the createSlice function from Redux Toolkit.
+*/
 
 const initialState: ResumeData = defaultResumeContent;
 
-const ACTION_TYPES = {
-    SET_RESUME_DATA: "SET_RESUME_DATA",
-    RESET_RESUME_DATA: "RESET_RESUME_DATA"
-};
 
-const professionalBasicReducer = (state = initialState, action: any) => {
-    switch (action.type) {
-        case ACTION_TYPES.SET_RESUME_DATA:
-            return action.payload;
-        case ACTION_TYPES.RESET_RESUME_DATA:
+const professionalBasicSlice = createSlice({
+    name: "professionalBasic",
+    initialState,
+    reducers: {
+        setProfessionalBasicResumeData: (state: ResumeData, action: { payload: ResumeData }) => {
+            return {
+                ...state,
+                ...action.payload
+            };
+        },
+        resetProfessionalBasicResumeData: () => {
             return defaultResumeContent;
-        default:
-            return state;
+        }
     }
-}
-
-// Create getters and setters for the resume data
-export const setProfessionalBasicResumeData = (data: ResumeData) => ({
-    type: ACTION_TYPES.SET_RESUME_DATA,
-    payload: data
-});
-export const resetProfessionalBasicResumeData = () => ({
-    type: ACTION_TYPES.RESET_RESUME_DATA
 });
 
+// Create getters for the slice
 export const getProfessionalBasicResumeData = (state: { professionalBasic: ResumeData }) => state.professionalBasic;
 
-export default professionalBasicReducer;
+// export the action creators
+export const { setProfessionalBasicResumeData, resetProfessionalBasicResumeData } = professionalBasicSlice.actions;
+
+// export the reducer from the slice
+export default professionalBasicSlice.reducer;
 
 
 

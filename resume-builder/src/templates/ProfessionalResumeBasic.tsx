@@ -8,7 +8,7 @@ import '../styles/ProfessionalResumeBasic.css';
 import { useNavigate } from 'react-router-dom';
 import { ResumeData, defaultResumeStaticCSS, defaultTextContentCSS } from '../utils/ProfessionalResumeDefaultContent';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProfessionalBasicResumeData, setProfessionalBasicResumeData } from './ProfessionalResumeBasicSlice';
+import {  getProfessionalBasicResumeData, setProfessionalBasicResumeData } from './ProfessionalResumeBasicSlice';
 
 const ProfessionalResumeBasic: React.FC = () => {
 
