@@ -5,7 +5,7 @@ import html2canvas from 'html2canvas';
 import RichTextField from '../../utils/RichTextField';
 import '../../styles/ProfessionalResumeBasic.css';
 import { useNavigate } from 'react-router-dom';
-import { ProfessionalResumeData } from '../../utils/ProfessionalResumeDefaultContent';
+import { IProfessionalResumeData } from '../../utils/ProfessionalResumeDefaultContent';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfessionalBasicResumeData, setProfessionalBasicResumeData } from './ProfessionalResumeBasicSlice';
 import { useExtractComputedStyles } from '../../customHooks/useExtractComputedStyles';
@@ -24,7 +24,7 @@ import IApplicationConstants from '../../constants/Constants';
 const ProfessionalResumeBasic: React.FC = () => {
     const resumeDataFromStore = useSelector(getProfessionalBasicResumeData);
     const dispatch = useDispatch();
-    const [resumeData, setResumeData] = useState<ProfessionalResumeData>(resumeDataFromStore);
+    const [resumeData, setResumeData] = useState<IProfessionalResumeData>(resumeDataFromStore);
     const resumeRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
 
@@ -38,7 +38,7 @@ const ProfessionalResumeBasic: React.FC = () => {
 
 
     
-    const handleSectionChange = (section: keyof ProfessionalResumeData, field: 'heading' | 'content', value: string) => {
+    const handleSectionChange = (section: keyof IProfessionalResumeData, field: 'heading' | 'content', value: string) => {
         setResumeData(prev => ({
             ...prev,
             [section]: {

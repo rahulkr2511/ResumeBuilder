@@ -8,7 +8,7 @@
  */
 
 
-export interface ProfessionalResumeData {
+export interface IProfessionalResumeData {
     name: {
         heading: string;
         content: string;
@@ -35,7 +35,7 @@ export interface ProfessionalResumeData {
     };
 }
 
-export const defaultResumeContent: ProfessionalResumeData = {
+export const defaultResumeContent: IProfessionalResumeData = {
     name: {
         heading: "NAME",
         content: "JACQUELINE THOMPSON"

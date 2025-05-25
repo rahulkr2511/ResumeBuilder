@@ -1,4 +1,4 @@
-import { defaultResumeContent, ProfessionalResumeData } from "../../utils/ProfessionalResumeDefaultContent";
+import { defaultResumeContent, IProfessionalResumeData } from "../../utils/ProfessionalResumeDefaultContent";
 import { createSlice } from "@reduxjs/toolkit";
 
 
@@ -11,14 +11,14 @@ import { createSlice } from "@reduxjs/toolkit";
     Entire slice is created using the createSlice function from Redux Toolkit.
 */
 
-const initialState: ProfessionalResumeData = defaultResumeContent;
+const initialState: IProfessionalResumeData = defaultResumeContent;
 
 
 const professionalBasicSlice = createSlice({
     name: "professionalBasic",
     initialState,
     reducers: {
-        setProfessionalBasicResumeData: (state: ProfessionalResumeData, action: { payload: ProfessionalResumeData }) => {
+        setProfessionalBasicResumeData: (state: IProfessionalResumeData, action: { payload: IProfessionalResumeData }) => {
             return action.payload;
         },
         resetProfessionalBasicResumeData: () => {
@@ -28,7 +28,7 @@ const professionalBasicSlice = createSlice({
 });
 
 // Create getters for the slice
-export const getProfessionalBasicResumeData = (state: { professionalBasic: ProfessionalResumeData }) => state.professionalBasic;
+export const getProfessionalBasicResumeData = (state: { professionalBasic: IProfessionalResumeData }) => state.professionalBasic;
 
 // export the action creators
 export const { setProfessionalBasicResumeData, resetProfessionalBasicResumeData } = professionalBasicSlice.actions;
