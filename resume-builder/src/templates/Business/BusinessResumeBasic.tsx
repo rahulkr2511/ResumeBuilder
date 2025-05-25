@@ -1,15 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useExtractComputedStyles } from '../../customHooks/useExtractComputedStyles';
-import { Box, Button, IconButton, Menu, MenuItem } from '@mui/material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Box, Button } from '@mui/material';
+import DownloadIcon from '@mui/icons-material/Download';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IApplicationConstants from '../../constants/Constants';
 
-
-
-
 const BusinessResumeBasic = () => {
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const resumeRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
 
@@ -25,71 +22,75 @@ const BusinessResumeBasic = () => {
         navigate(`/`);
     }
 
-    const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
-            setAnchorEl(event.currentTarget);
-        };
-    
-    const handleMenuClose = () => {
-            setAnchorEl(null);
-        };
+    const handleSave = () => {
+        // TODO: Implement save functionality
+    }
 
-    
- 
+    const handleDownloadPDF = async () => {
+        // TODO: Implement PDF download functionality
+    }
+
     return (
-       <>
-       <div className="resume-wrapper">
-             <Box className="resume-actions" sx={{ 
-                position: 'fixed', 
-                top: 20, 
-                left: 20, 
-                zIndex: 1000,
-                display: 'flex',
-                gap: 2
-            }}>
+        <div className="resume-wrapper">
+            <Box 
+                component="header"
+                sx={{ 
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: '64px',
+                    backgroundColor: 'white',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                    zIndex: 1000,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '0 24px'
+                }}
+            >
                 <Button 
                     variant="outlined" 
                     color="primary" 
                     onClick={handleBack}
+                    startIcon={<ArrowBackIcon />}
                 >
-                    {IApplicationConstants.BACK}    
+                    {IApplicationConstants.BACK}
                 </Button>
+                <Box sx={{ display: 'flex', gap: 2 }}>
+                    <Button 
+                        variant="contained" 
+                        color="primary" 
+                        onClick={handleSave}
+                    >
+                        {IApplicationConstants.SAVE_CHANGES}
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        startIcon={<DownloadIcon />}
+                        onClick={handleDownloadPDF}
+                    >
+                        {IApplicationConstants.DOWNLOAD}
+                    </Button>
+                </Box>
             </Box>
-            <Box className="resume-actions" sx={{ 
-                position: 'fixed', 
-                top: 20, 
-                right: 20, 
-                zIndex: 1000,
-                display: 'flex',
-                gap: 2
-            }}>
-                <Button 
-                    variant="contained" 
-                    color="primary" 
-                    // onClick={handleSave}
-                >
-                   {IApplicationConstants.APPLY_CHANGES}
-                </Button>
-                <IconButton onClick={handleMenuClick}>
-                    <MoreVertIcon />
-                </IconButton>
-                <Menu
-                    anchorEl={anchorEl}
-                    open={Boolean(anchorEl)}
-                    onClose={handleMenuClose}
-                >
-                    <MenuItem onClick={() => {
-                        // handleDownloadPDF();
-                        handleMenuClose();
-                    }}>
-                        {IApplicationConstants.DOWNLOAD_AS_PDF}
-                    </MenuItem>
-                </Menu>
+
+            <Box 
+                component="main"
+                sx={{
+                    marginTop: '64px', // Height of the header
+                    padding: '24px',
+                    minHeight: 'calc(100vh - 64px)',
+                    backgroundColor: '#f5f5f5'
+                }}
+            >
+                <div className="resume-container" ref={resumeRef}>
+                    Business Resume Basic Template
+                </div>
             </Box>
-            <div className="resume-container" ref={resumeRef}>
-                Business Resume Basic Template
-            </div>
-            </div>
-       </>);
+        </div>
+    );
 }
 
 export default React.memo(BusinessResumeBasic);
