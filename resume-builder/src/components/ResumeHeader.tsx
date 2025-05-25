@@ -3,6 +3,7 @@ import { Box, Button } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IApplicationConstants from '../constants/Constants';
+import { Colors } from '../constants/Colors';
 
 /**
  * * Props for the ResumeHeader component
@@ -39,8 +40,8 @@ const ResumeHeader: React.FC<ResumeHeaderProps> = ({ onBack, onSave, onDownload 
                 left: 0,
                 right: 0,
                 height: '64px',
-                backgroundColor: 'white',
-                boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                backgroundColor: Colors.BACKGROUND.WHITE,
+                boxShadow: `0 2px 4px ${Colors.SHADOW}`,
                 zIndex: 1000,
                 display: 'flex',
                 alignItems: 'center',
@@ -49,26 +50,50 @@ const ResumeHeader: React.FC<ResumeHeaderProps> = ({ onBack, onSave, onDownload 
             }}
         >
             <Button 
-                variant="outlined" 
-                color="primary" 
+                variant="contained" 
                 onClick={onBack}
                 startIcon={<ArrowBackIcon />}
+                sx={{
+                    backgroundColor: Colors.BLUE.PRIMARY,
+                    color: Colors.TEXT.WHITE,
+                    '&:hover': {
+                        backgroundColor: Colors.BLUE.DARK,
+                    },
+                    '& .MuiSvgIcon-root': {
+                        color: Colors.TEXT.WHITE
+                    }
+                }}
             >
                 {IApplicationConstants.BACK}
             </Button>
             <Box sx={{ display: 'flex', gap: 2 }}>
                 <Button 
                     variant="contained" 
-                    color="primary" 
                     onClick={onSave}
+                    sx={{
+                        backgroundColor: Colors.BLUE.PRIMARY,
+                        color: Colors.TEXT.WHITE,
+                        '&:hover': {
+                            backgroundColor: Colors.BLUE.DARK,
+                        }
+                    }}
                 >
                     {IApplicationConstants.SAVE_CHANGES}
                 </Button>
                 <Button
                     variant="contained"
-                    color="primary"
                     startIcon={<DownloadIcon />}
                     onClick={onDownload}
+                    sx={{
+                        backgroundColor: Colors.BLUE.PRIMARY,
+                        color: Colors.TEXT.WHITE,
+                        '&:hover': {
+                            backgroundColor: Colors.BLUE.DARK,
+                        },
+                        '& .MuiSvgIcon-root': {
+                            color: Colors.TEXT.WHITE
+                        }
+                    }}
                 >
                     {IApplicationConstants.DOWNLOAD}
                 </Button>
