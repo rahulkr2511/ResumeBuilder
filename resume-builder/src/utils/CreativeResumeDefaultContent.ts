@@ -1,4 +1,3 @@
-
 export interface ICreativeResumeData {
 name: {
     heading: string;
@@ -41,17 +40,19 @@ export const defaultResumeContent: ICreativeResumeData = {
       content: "Family Wellness Counselor",
     },
     contact: {
-      heading: "Contact",
+      heading: "CONTACT",
       content: `
         <div class='space-y-2'>
           <div class='flex items-center gap-2'><span class='font-bold'>📞</span> +123-456-7890</div>
+          <hr style="border: none; border-top: 1px solid white; margin: 8px 0;" />
           <div class='flex items-center gap-2'><span class='font-bold'>✉️</span> hello@reallygreatsite.com</div>
+          <hr style="border: none; border-top: 1px solid white; margin: 8px 0;" />
           <div class='flex items-center gap-2'><span class='font-bold'>📍</span> 123 Anywhere St., Any City, ST 12345</div>
         </div>
       `,
     },
     summary: {
-      heading: "Professional Summary",
+      heading: "PROFESSIONAL SUMMARY",
       content: `
         <ul class='list-disc list-inside space-y-1'>
           <li>Over 5 years of experience in family counseling, specializing in conflict resolution and communication.</li>
@@ -61,7 +62,7 @@ export const defaultResumeContent: ICreativeResumeData = {
       `,
     },
     skills: {
-      heading: "Skills",
+      heading: "SKILLS",
       content: `
         <ul class='list-disc list-inside space-y-1'>
           <li>Family Assessment</li>
@@ -74,19 +75,19 @@ export const defaultResumeContent: ICreativeResumeData = {
       `,
     },
     certification: {
-      heading: "Certification",
+      heading: "CERTIFICATION",
       content: `<p><strong>Certified Family Counselor</strong> <span class='bg-gray-300 px-2 py-1 text-xs rounded-full ml-2'>AUG 2021</span><br/>Arowwai Industries Training Center, Any City</p>`
     },
     membership: {
-      heading: "Membership",
+      heading: "MEMBERSHIP",
       content: `<p><strong>AMFT Member</strong> <span class='bg-green-200 px-2 py-1 text-xs rounded-full ml-2'>2022–PRESENT</span><br/>Association for Marriage and Family Therapy</p>`
     },
     education: {
-      heading: "Education",
+      heading: "EDUCATION",
       content: `<div><p><strong>Master of Science in Marriage and Family Counseling</strong> <span class='float-right'>2021</span></p><p>Rimberio University <span class='float-right'>Graduated: May 2024</span></p></div>`
     },
     experience: {
-      heading: "Experience",
+      heading: "EXPERIENCE",
       content: `<div><p><strong>Family Wellness Counselor at Giggling Platypus Co., Any City</strong> <span class='float-right'>2022</span></p><ul class='list-disc list-inside space-y-1'><li>Conducted individual and family counseling sessions, addressing issues such as domestic violence, abuse, and others.</li><li>Collaborated with a multidisciplinary team to develop holistic treatment plans for families.</li></ul></div>`
     },
   };

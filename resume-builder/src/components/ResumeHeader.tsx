@@ -57,7 +57,7 @@ const ResumeHeader: React.FC<ResumeHeaderProps> = ({ onBack, onSave, onDownload 
                     backgroundColor: Colors.BLUE.PRIMARY,
                     color: Colors.TEXT.WHITE,
                     '&:hover': {
-                        backgroundColor: Colors.BLUE.DARK,
+                        backgroundColor: Colors.BLUE.SECONDARY,
                     },
                     '& .MuiSvgIcon-root': {
                         color: Colors.TEXT.WHITE
@@ -74,7 +74,7 @@ const ResumeHeader: React.FC<ResumeHeaderProps> = ({ onBack, onSave, onDownload 
                         backgroundColor: Colors.BLUE.PRIMARY,
                         color: Colors.TEXT.WHITE,
                         '&:hover': {
-                            backgroundColor: Colors.BLUE.DARK,
+                            backgroundColor: Colors.BLUE.SECONDARY,
                         }
                     }}
                 >
@@ -88,7 +88,7 @@ const ResumeHeader: React.FC<ResumeHeaderProps> = ({ onBack, onSave, onDownload 
                         backgroundColor: Colors.BLUE.PRIMARY,
                         color: Colors.TEXT.WHITE,
                         '&:hover': {
-                            backgroundColor: Colors.BLUE.DARK,
+                            backgroundColor: Colors.BLUE.SECONDARY,
                         },
                         '& .MuiSvgIcon-root': {
                             color: Colors.TEXT.WHITE

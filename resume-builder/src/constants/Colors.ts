@@ -18,7 +18,9 @@ export const Colors = {
     // Background colors
     BACKGROUND: {
         LIGHT: '#F5F5F5',
-        WHITE: '#FFFFFF'
+        WHITE: '#FFFFFF',
+        CREAM: '#e9e3cf',
+        PINE_GREEN: '#5a6d2c'
     },
     
     // Hover states
@@ -29,7 +31,8 @@ export const Colors = {
     // Text colors
     TEXT: {
         WHITE: '#FFFFFF',
-        BLACK: '#000000'
+        BLACK: '#000000',
+        DARK: '#333333'   // Dark gray for better readability
     },
     
     // Shadow colors
@@ -38,8 +41,8 @@ export const Colors = {
     // Blue colors
     BLUE: {
         PRIMARY: '#1976d2',    // Material-UI primary blue
-        DARK: '#1565c0',       // Darker shade for hover
-        LIGHT: '#42a5f5'       // Lighter shade
+        SECONDARY: '#42a5f5',
+        LIGHT: '#e3f2fd'
     }
 } as const;
 

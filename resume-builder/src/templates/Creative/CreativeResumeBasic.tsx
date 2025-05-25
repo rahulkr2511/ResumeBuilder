@@ -1,27 +1,33 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useExtractComputedStyles } from '../../customHooks/useExtractComputedStyles';
-import { Box } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import ResumeHeader from '../../components/ResumeHeader';
+import ProfileImagePicker from '../../utils/ProfileImagePicker';
 import { defaultResumeContent } from '../../utils/CreativeResumeDefaultContent';
 import { ICreativeResumeData } from '../../utils/CreativeResumeDefaultContent';
 import RichTextField from '../../utils/RichTextField';
+import { Colors } from '../../constants/Colors';
 
 const CreateResumeBasic = () => {
     const resumeRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
-
     const [resumeData, setResumeData] = React.useState(defaultResumeContent);
+    const [profileImage, setProfileImage] = useState<string>('');
     
-     const handleSectionChange = (section: keyof ICreativeResumeData, field: 'heading' | 'content', value: string) => {
-            // setResumeData(prev => ({
-            //     ...prev,
-            //     [section]: {
-            //         ...prev[section],
-            //         [field]: value
-            //     }
-            // }));
-        };
+    const handleSectionChange = (section: keyof ICreativeResumeData, field: 'heading' | 'content', value: string) => {
+        setResumeData(prev => ({
+            ...prev,
+            [section]: {
+                ...prev[section],
+                [field]: value
+            }
+        }));
+    };
+
+    const handleImageSelect = (imageUrl: string) => {
+        setProfileImage(imageUrl);
+    };
 
     /**
      * * Custom hook to extract computed styles from the resume container
@@ -57,11 +63,190 @@ const CreateResumeBasic = () => {
                     marginTop: '64px',
                     padding: '24px',
                     minHeight: 'calc(100vh - 64px)',
-                    backgroundColor: '#f5f5f5'
+                    backgroundColor: Colors.BACKGROUND.LIGHT
                 }}
             >
                 <div className="resume-container" ref={resumeRef}>
-                    
+                    <Box sx={{ 
+                        display: 'flex',
+                        flexDirection: { xs: 'column', md: 'row' },
+                        gap: 0
+                    }}>
+                        {/* Left Column - 2/5 width */}
+                        <Box sx={{ 
+                            flex: { xs: '1 1 100%', md: '0 0 40%' },
+                            display: 'flex',
+                            flexDirection: 'column',
+                            borderRadius: { xs: '8px 8px 0 0', md: '8px 0 0 8px' },
+                            overflow: 'hidden'
+                        }}>
+                            {/* Top Section - Contact */}
+                            <Box sx={{ 
+                                backgroundColor: Colors.BACKGROUND.CREAM,
+                                color: Colors.TEXT.DARK,
+                                padding: '32px',
+                                flex: '0 0 auto',
+                                borderTopLeftRadius: '8px',
+                                borderTopRightRadius: { xs: '8px', md: '0' }
+                            }}>
+                                <ProfileImagePicker 
+                                    onImageSelect={handleImageSelect}
+                                    size={150}
+                                    backgroundColor={Colors.BACKGROUND.CREAM}
+                                    containerStyle={{ marginBottom: '24px' }}
+                                    tooltipText="Add Profile Photo"
+                                />
+                                <Box sx={{ mb: 4 }}>
+                                    <RichTextField
+                                        value={resumeData.contact.content}
+                                        onChange={(value) => handleSectionChange("contact", "content", value)}
+                                    />
+                                </Box>
+                            </Box>
+
+                            {/* Bottom Section - Skills, Certification, and Membership */}
+                            <Box sx={{ 
+                                backgroundColor: Colors.BACKGROUND.WHITE,
+                                color: Colors.TEXT.DARK,
+                                padding: '32px',
+                                flex: '1 1 auto',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: 4
+                            }}>
+                                {/* Skills Section */}
+                                <Box>
+                                    <Box sx={{ mb: 2 }}>
+                                        <RichTextField
+                                            value={`<h2 style="text-align: left; font-size: 18px; margin: 0;">${resumeData.skills.heading}</h2>`}
+                                            onChange={(value) => handleSectionChange("skills", "heading", value.replace(/<[^>]*>/g, ''))}
+                                            isHeading={true}
+                                        />
+                                        <Divider sx={{ borderColor: 'black', borderWidth: 1, mt: 1 }} />
+                                    </Box>
+                                    <RichTextField
+                                        value={resumeData.skills.content}
+                                        onChange={(value) => handleSectionChange("skills", "content", value)}
+                                    />
+                                </Box>
+
+                                {/* Certification Section */}
+                                <Box>
+                                    <Box sx={{ mb: 2 }}>
+                                        <RichTextField
+                                            value={`<h2 style="text-align: left; font-size: 18px; margin: 0;">${resumeData.certification?.heading || 'CERTIFICATION'}</h2>`}
+                                            onChange={(value) => handleSectionChange("certification", "heading", value.replace(/<[^>]*>/g, ''))}
+                                            isHeading={true}
+                                        />
+                                        <Divider sx={{ borderColor: 'black', borderWidth: 1, mt: 1 }} />
+                                    </Box>
+                                    <RichTextField
+                                        value={resumeData.certification?.content || ''}
+                                        onChange={(value) => handleSectionChange("certification", "content", value)}
+                                    />
+                                </Box>
+
+                                {/* Membership Section */}
+                                <Box>
+                                    <Box sx={{ mb: 2 }}>
+                                        <RichTextField
+                                            value={`<h2 style="text-align: left; font-size: 18px; margin: 0;">${resumeData.membership?.heading || 'MEMBERSHIP'}</h2>`}
+                                            onChange={(value) => handleSectionChange("membership", "heading", value.replace(/<[^>]*>/g, ''))}
+                                            isHeading={true}
+                                        />
+                                        <Divider sx={{ borderColor: 'black', borderWidth: 1, mt: 1 }} />
+                                    </Box>
+                                    <RichTextField
+                                        value={resumeData.membership?.content || ''}
+                                        onChange={(value) => handleSectionChange("membership", "content", value)}
+                                    />
+                                </Box>
+                            </Box>
+                        </Box>
+
+                        {/* Right Column - 3/5 width */}
+                        <Box sx={{ 
+                            flex: { xs: '1 1 100%', md: '0 0 60%' },
+                            backgroundColor: Colors.BACKGROUND.WHITE,
+                            padding: '32px',
+                            borderRadius: { xs: '0 0 8px 8px', md: '0 8px 8px 0' },  // Adjust border radius
+                            borderTop: { xs: 'none', md: 'none' }  // Remove top border on desktop
+                        }}>
+                            {/* Name Section */}
+                            <Box sx={{ 
+                                mb: 4,
+                                backgroundColor: Colors.BACKGROUND.PINE_GREEN,
+                                color: Colors.BACKGROUND.WHITE,
+                                padding: '24px',
+                                marginTop: { xs: '0', md: '-32px' },  // Negative margin to connect with contact section
+                                marginLeft: { xs: '0', md: '-32px' },  // Negative margin to remove padding
+                                marginRight: { xs: '0', md: '-32px' }, // Negative margin to remove padding
+                                borderTopRightRadius: { xs: '8px', md: '0' },  // Adjust border radius
+                                borderTopLeftRadius: { xs: '8px', md: '0' }    // Adjust border radius
+                            }}>
+                                <Box sx={{ mb: 2 }}>
+                                    <RichTextField
+                                        value={`<h1 style="text-align: left; font-size: 18px; margin: 0;">${resumeData.name.heading || 'NAME'}</h1>`}
+                                        onChange={(value) => handleSectionChange("name", "heading", value.replace(/<[^>]*>/g, ''))}
+                                        isHeading={true}
+                                    />
+                                    <Divider sx={{ borderColor: Colors.BACKGROUND.WHITE, borderWidth: 1, mt: 1 }} />
+                                </Box>
+                                <RichTextField
+                                    value={resumeData.name.content}
+                                    onChange={(value) => handleSectionChange("name", "content", value)}
+                                />
+                            </Box>
+
+                            {/* Summary Section */}
+                            <Box sx={{ mb: 4 }}>
+                                <Box sx={{ mb: 2 }}>
+                                    <RichTextField
+                                        value={`<h2 style="text-align: left; font-size: 18px; margin: 0;">${resumeData.summary.heading}</h2>`}
+                                        onChange={(value) => handleSectionChange("summary", "heading", value.replace(/<[^>]*>/g, ''))}
+                                        isHeading={true}
+                                    />
+                                    <Divider sx={{ borderColor: 'black', borderWidth: 1, mt: 1 }} />
+                                </Box>
+                                <RichTextField
+                                    value={resumeData.summary.content}
+                                    onChange={(value) => handleSectionChange("summary", "content", value)}
+                                />
+                            </Box>
+
+                            {/* Experience Section */}
+                            <Box sx={{ mb: 4 }}>
+                                <Box sx={{ mb: 2 }}>
+                                    <RichTextField
+                                        value={`<h2 style="text-align: left; font-size: 18px; margin: 0;">${resumeData.experience.heading}</h2>`}
+                                        onChange={(value) => handleSectionChange("experience", "heading", value.replace(/<[^>]*>/g, ''))}
+                                        isHeading={true}
+                                    />
+                                    <Divider sx={{ borderColor: 'black', borderWidth: 1, mt: 1 }} />
+                                </Box>
+                                <RichTextField
+                                    value={resumeData.experience.content}
+                                    onChange={(value) => handleSectionChange("experience", "content", value)}
+                                />
+                            </Box>
+
+                            {/* Education Section */}
+                            <Box sx={{ mb: 4 }}>
+                                <Box sx={{ mb: 2 }}>
+                                    <RichTextField
+                                        value={`<h2 style="text-align: left; font-size: 18px; margin: 0;">${resumeData.education.heading}</h2>`}
+                                        onChange={(value) => handleSectionChange("education", "heading", value.replace(/<[^>]*>/g, ''))}
+                                        isHeading={true}
+                                    />
+                                    <Divider sx={{ borderColor: 'black', borderWidth: 1, mt: 1 }} />
+                                </Box>
+                                <RichTextField
+                                    value={resumeData.education.content}
+                                    onChange={(value) => handleSectionChange("education", "content", value)}
+                                />
+                            </Box>
+                        </Box>
+                    </Box>
                 </div>
             </Box>
         </div>
