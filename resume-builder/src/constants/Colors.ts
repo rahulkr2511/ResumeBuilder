@@ -20,7 +20,7 @@ export const Colors = {
         LIGHT: '#F5F5F5',
         WHITE: '#FFFFFF',
         CREAM: '#e9e3cf',
-        PINE_GREEN: '#5a6d2c'
+        OLIVE_GREEN: '#5a6d2c'
     },
     
     // Hover states

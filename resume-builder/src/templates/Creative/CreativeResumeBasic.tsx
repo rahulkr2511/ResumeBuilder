@@ -118,7 +118,7 @@ const CreateResumeBasic = () => {
                                 <Box>
                                     <Box sx={{ mb: 2 }}>
                                         <RichTextField
-                                            value={`<h2 style="text-align: left; font-size: 18px; margin: 0;">${resumeData.skills.heading}</h2>`}
+                                            value={`<div style="text-align: left; font-size: 18px; font-weight: bold; margin: 0; width: 100%;">${resumeData.skills.heading}</div>`}
                                             onChange={(value) => handleSectionChange("skills", "heading", value.replace(/<[^>]*>/g, ''))}
                                             isHeading={true}
                                         />
@@ -134,7 +134,7 @@ const CreateResumeBasic = () => {
                                 <Box>
                                     <Box sx={{ mb: 2 }}>
                                         <RichTextField
-                                            value={`<h2 style="text-align: left; font-size: 18px; margin: 0;">${resumeData.certification?.heading || 'CERTIFICATION'}</h2>`}
+                                            value={`<div style="text-align: left; font-size: 18px; font-weight: bold; margin: 0; width: 100%;">${resumeData.certification?.heading || 'CERTIFICATION'}</div>`}
                                             onChange={(value) => handleSectionChange("certification", "heading", value.replace(/<[^>]*>/g, ''))}
                                             isHeading={true}
                                         />
@@ -150,7 +150,7 @@ const CreateResumeBasic = () => {
                                 <Box>
                                     <Box sx={{ mb: 2 }}>
                                         <RichTextField
-                                            value={`<h2 style="text-align: left; font-size: 18px; margin: 0;">${resumeData.membership?.heading || 'MEMBERSHIP'}</h2>`}
+                                            value={`<div style="text-align: left; font-size: 18px; font-weight: bold; margin: 0; width: 100%;">${resumeData.membership?.heading || 'MEMBERSHIP'}</div>`}
                                             onChange={(value) => handleSectionChange("membership", "heading", value.replace(/<[^>]*>/g, ''))}
                                             isHeading={true}
                                         />
@@ -175,7 +175,7 @@ const CreateResumeBasic = () => {
                             {/* Name Section */}
                             <Box sx={{ 
                                 mb: 4,
-                                backgroundColor: Colors.BACKGROUND.PINE_GREEN,
+                                backgroundColor: Colors.BACKGROUND.OLIVE_GREEN,
                                 color: Colors.BACKGROUND.WHITE,
                                 padding: '24px',
                                 marginTop: { xs: '0', md: '-32px' },  // Negative margin to connect with contact section
@@ -202,7 +202,7 @@ const CreateResumeBasic = () => {
                             <Box sx={{ mb: 4 }}>
                                 <Box sx={{ mb: 2 }}>
                                     <RichTextField
-                                        value={`<h2 style="text-align: left; font-size: 18px; margin: 0;">${resumeData.summary.heading}</h2>`}
+                                        value={`<div style="text-align: left; font-size: 18px; font-weight: bold; margin: 0; width: 100%;">${resumeData.summary.heading}</div>`}
                                         onChange={(value) => handleSectionChange("summary", "heading", value.replace(/<[^>]*>/g, ''))}
                                         isHeading={true}
                                     />
@@ -218,7 +218,7 @@ const CreateResumeBasic = () => {
                             <Box sx={{ mb: 4 }}>
                                 <Box sx={{ mb: 2 }}>
                                     <RichTextField
-                                        value={`<h2 style="text-align: left; font-size: 18px; margin: 0;">${resumeData.experience.heading}</h2>`}
+                                        value={`<div style="text-align: left; font-size: 18px; font-weight: bold; margin: 0; width: 100%;">${resumeData.experience.heading}</div>`}
                                         onChange={(value) => handleSectionChange("experience", "heading", value.replace(/<[^>]*>/g, ''))}
                                         isHeading={true}
                                     />
@@ -234,7 +234,7 @@ const CreateResumeBasic = () => {
                             <Box sx={{ mb: 4 }}>
                                 <Box sx={{ mb: 2 }}>
                                     <RichTextField
-                                        value={`<h2 style="text-align: left; font-size: 18px; margin: 0;">${resumeData.education.heading}</h2>`}
+                                        value={`<div style="text-align: left; font-size: 18px; font-weight: bold; margin: 0; width: 100%;">${resumeData.education.heading}</div>`}
                                         onChange={(value) => handleSectionChange("education", "heading", value.replace(/<[^>]*>/g, ''))}
                                         isHeading={true}
                                     />
@@ -247,6 +247,15 @@ const CreateResumeBasic = () => {
                             </Box>
                         </Box>
                     </Box>
+                    {/* Footer */}
+                    <Box sx={{ 
+                        height: '30px',
+                        backgroundColor: Colors.BACKGROUND.OLIVE_GREEN,
+                        marginTop: '32px',
+                        width: '100%',
+                        borderBottomLeftRadius: '8px',
+                        borderBottomRightRadius: '8px'
+                    }} />
                 </div>
             </Box>
         </div>
