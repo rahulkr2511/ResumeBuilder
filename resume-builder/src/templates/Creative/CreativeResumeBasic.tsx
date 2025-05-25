@@ -3,10 +3,25 @@ import { useNavigate } from 'react-router-dom';
 import { useExtractComputedStyles } from '../../customHooks/useExtractComputedStyles';
 import { Box } from '@mui/material';
 import ResumeHeader from '../../components/ResumeHeader';
+import { defaultResumeContent } from '../../utils/CreativeResumeDefaultContent';
+import { ICreativeResumeData } from '../../utils/CreativeResumeDefaultContent';
+import RichTextField from '../../utils/RichTextField';
 
 const CreateResumeBasic = () => {
     const resumeRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
+
+    const [resumeData, setResumeData] = React.useState(defaultResumeContent);
+    
+     const handleSectionChange = (section: keyof ICreativeResumeData, field: 'heading' | 'content', value: string) => {
+            // setResumeData(prev => ({
+            //     ...prev,
+            //     [section]: {
+            //         ...prev[section],
+            //         [field]: value
+            //     }
+            // }));
+        };
 
     /**
      * * Custom hook to extract computed styles from the resume container
@@ -46,7 +61,7 @@ const CreateResumeBasic = () => {
                 }}
             >
                 <div className="resume-container" ref={resumeRef}>
-                    Creative Resume Basic Template
+                    
                 </div>
             </Box>
         </div>
