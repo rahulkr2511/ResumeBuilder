@@ -42,12 +42,21 @@ export const defaultResumeContent: ICreativeResumeData = {
     contact: {
       heading: "CONTACT",
       content: `
-        <div class='space-y-2'>
-          <div class='flex items-center gap-2'><span class='font-bold'>📞</span> +123-456-7890</div>
-          <hr style="border: none; border-top: 1px solid white; margin: 8px 0;" />
-          <div class='flex items-center gap-2'><span class='font-bold'>✉️</span> hello@reallygreatsite.com</div>
-          <hr style="border: none; border-top: 1px solid white; margin: 8px 0;" />
-          <div class='flex items-center gap-2'><span class='font-bold'>📍</span> 123 Anywhere St., Any City, ST 12345</div>
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="display: flex; align-items: center; gap: 8px; padding: 8px 0;">
+            <span style="font-weight: bold;">📞</span>
+            <span>+123-456-7890</span>
+          </div>
+          
+          <div style="display: flex; align-items: center; gap: 8px; padding: 8px 0;">
+            <span style="font-weight: bold;">✉️</span>
+            <span>hello@reallygreatsite.com</span>
+          </div>
+          
+          <div style="display: flex; align-items: center; gap: 8px; padding: 8px 0;">
+            <span style="font-weight: bold;">📍</span>
+            <span>123 Anywhere St., Any City, ST 12345</span>
+          </div>
         </div>
       `,
     },
