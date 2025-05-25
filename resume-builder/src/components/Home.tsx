@@ -38,15 +38,39 @@ const Home: React.FC = () => {
     >
       <Container maxWidth="lg">
         <Box textAlign="center" mb={6}>
-          <Typography
-            variant="h3"
-            component="h1"
-            fontWeight="bold"
-            gutterBottom
-            sx={{ color: 'primary.main' }}
-          >
-            {IApplicationConstants.APP_NAME}
-          </Typography>
+          <Box sx={{ 
+            display: 'flex', 
+            alignItems: 'flex-end',
+            justifyContent: 'center', 
+            gap: 0,
+            mb: 4
+          }}>
+            <Box 
+              component="img"
+              src="/images/logo-icon.png"
+              alt="CraftMyCV Logo"
+              sx={{
+                height: '80px',
+                width: 'auto',
+                marginRight: '-20px',
+                marginBottom: '-12px'
+              }}
+            />
+            <Typography
+              variant="h3"
+              component="h1"
+              fontWeight="bold"
+              sx={{ 
+                color: 'primary.main',
+                display: 'inline-block',
+                marginLeft: '-8px',
+                fontSize: { xs: '2rem', md: '2.5rem' },
+                lineHeight: 1
+              }}
+            >
+              {IApplicationConstants.APP_NAME}
+            </Typography>
+          </Box>
           <Typography variant="h6" color="text.secondary" gutterBottom>
             {IApplicationConstants.APP_DESCRIPTION}
           </Typography>

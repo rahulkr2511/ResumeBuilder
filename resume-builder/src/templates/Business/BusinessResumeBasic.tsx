@@ -27,9 +27,9 @@ const BusinessResumeBasic = () => {
     const handleDownloadPDF = async () => {
         // TODO: Implement PDF download functionality
     }
-
+ 
     return (
-        <div className="resume-wrapper">
+       <div className="resume-wrapper">
             <ResumeHeader 
                 onBack={handleBack}
                 onSave={handleSave}
@@ -45,11 +45,11 @@ const BusinessResumeBasic = () => {
                     backgroundColor: '#f5f5f5'
                 }}
             >
-                <div className="resume-container" ref={resumeRef}>
-                    Business Resume Basic Template
-                </div>
+            <div className="resume-container" ref={resumeRef}>
+                Business Resume Basic Template
+            </div>
             </Box>
-        </div>
+            </div>
     );
 }
 
