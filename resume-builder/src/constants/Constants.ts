@@ -14,8 +14,10 @@ const IApplicationConstants = {
   BACK: 'Back',
   NEXT: 'Next',
   APPLY_CHANGES: 'Apply Changes',
+  SAVE_CHANGES: 'Save Changes',
   DOWNLOAD_AS_PDF: 'Download as PDF',
   RESET_CHANGES: 'Reset Changes',
+  DOWNLOAD: 'Download',
 
   FOOT_NOTE: 'Build, customize, and download for free 🚀'
 

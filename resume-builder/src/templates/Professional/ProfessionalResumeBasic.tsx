@@ -1,8 +1,9 @@
 import React, { useState, useRef, use } from 'react';
-import { TextField, Button, Divider, Box, Menu, MenuItem, IconButton } from '@mui/material';
+import { TextField, Button, Divider, Box, IconButton } from '@mui/material';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import DownloadIcon from '@mui/icons-material/Download';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import RichTextField from '../../utils/RichTextField';
 import '../../styles/ProfessionalResumeBasic.css';
 import { useNavigate } from 'react-router-dom';
@@ -25,7 +26,6 @@ const ProfessionalResumeBasic: React.FC = () => {
     const resumeDataFromStore = useSelector(getProfessionalBasicResumeData);
     const dispatch = useDispatch();
     const [resumeData, setResumeData] = useState<ProfessionalResumeData>(resumeDataFromStore);
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const resumeRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
 
@@ -160,160 +160,158 @@ const ProfessionalResumeBasic: React.FC = () => {
         }
     };
 
-    const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleMenuClose = () => {
-        setAnchorEl(null);
-    };
-
     return (
         <div className="resume-wrapper">
-             <Box className="resume-actions" sx={{ 
-                position: 'fixed', 
-                top: 20, 
-                left: 20, 
-                zIndex: 1000,
-                display: 'flex',
-                gap: 2
-            }}>
+            <Box 
+                component="header"
+                sx={{ 
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: '64px',
+                    backgroundColor: 'white',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                    zIndex: 1000,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '0 24px'
+                }}
+            >
                 <Button 
                     variant="outlined" 
                     color="primary" 
                     onClick={handleBack}
+                    startIcon={<ArrowBackIcon />}
                 >
                     {IApplicationConstants.BACK}
                 </Button>
-            </Box>
-            <Box className="resume-actions" sx={{ 
-                position: 'fixed', 
-                top: 20, 
-                right: 20, 
-                zIndex: 1000,
-                display: 'flex',
-                gap: 2
-            }}>
-                <Button 
-                    variant="contained" 
-                    color="primary" 
-                    onClick={handleSave}
-                >
-                    {IApplicationConstants.APPLY_CHANGES}
-                </Button>
-                <IconButton onClick={handleMenuClick}>
-                    <MoreVertIcon />
-                </IconButton>
-                <Menu
-                    anchorEl={anchorEl}
-                    open={Boolean(anchorEl)}
-                    onClose={handleMenuClose}
-                >
-                    <MenuItem onClick={() => {
-                        handleDownloadPDF();
-                        handleMenuClose();
-                    }}>
-                        {IApplicationConstants.DOWNLOAD_AS_PDF}
-                    </MenuItem>
-                </Menu>
+                <Box sx={{ display: 'flex', gap: 2 }}>
+                    <Button 
+                        variant="contained" 
+                        color="primary" 
+                        onClick={handleSave}
+                    >
+                        {IApplicationConstants.SAVE_CHANGES}
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        startIcon={<DownloadIcon />}
+                        onClick={handleDownloadPDF}
+                    >
+                        {IApplicationConstants.DOWNLOAD}
+                    </Button>
+                </Box>
             </Box>
 
-            <div className="resume-container" ref={resumeRef}>
-                <div className="resume-header">
-                    <RichTextField
-                        value={resumeData.name.content}
-                        onChange={(value) => handleSectionChange("name", "content", value)}
-                        isHeading={true}
-                    />
+            <Box 
+                component="main"
+                sx={{
+                    marginTop: '64px', // Height of the header
+                    padding: '24px',
+                    minHeight: 'calc(100vh - 64px)',
+                    backgroundColor: '#f5f5f5'
+                }}
+            >
+                <div className="resume-container" ref={resumeRef}>
+                    <div className="resume-header">
+                        <RichTextField
+                            value={resumeData.name.content}
+                            onChange={(value) => handleSectionChange("name", "content", value)}
+                            isHeading={true}
+                        />
+                    </div>
+                    <div className="resume-contact">
+                        <TextField
+                            fullWidth
+                            multiline
+                            value={resumeData.contact.content}
+                            onChange={(e) => handleSectionChange("contact", "content", e.target.value)}
+                            variant="standard"
+                            InputProps={{
+                                disableUnderline: true,
+                                style: { 
+                                    color: '#555', 
+                                    fontSize: '0.9em', 
+                                    textAlign: 'center',
+                                    fontFamily: 'Arial, sans-serif',
+                                    whiteSpace: 'pre-wrap'
+                                },
+                            }}
+                            sx={{
+                                '& .MuiInputBase-root': {
+                                    width: '70%',
+                                    margin: '0 auto'
+                                },
+                                '& .MuiInputBase-input': {
+                                    textAlign: 'center',
+                                    padding: '0'
+                                }
+                            }}
+                        />
+                    </div>
+
+                    <Divider className="resume-divider" />
+
+                    <div className="resume-section">
+                        <RichTextField
+                            value={`<h2>${resumeData.summary.heading}</h2>`}
+                            onChange={(value) => handleSectionChange("summary", "heading", value.replace(/<[^>]*>/g, ''))}
+                            isHeading={true}
+                        />
+                        <RichTextField
+                            value={resumeData.summary.content}
+                            onChange={(value) => handleSectionChange("summary", "content", value)}
+                        />
+                    </div>
+
+                    <Divider className="resume-divider" />
+
+                    <div className="resume-section">
+                        <RichTextField
+                            value={`<h2>${resumeData.workExperience.heading}</h2>`}
+                            onChange={(value) => handleSectionChange("workExperience", "heading", value.replace(/<[^>]*>/g, ''))}
+                            isHeading={true}
+                        />
+                        <RichTextField
+                            value={resumeData.workExperience.content}
+                            onChange={(value) => handleSectionChange("workExperience", "content", value)}
+                        />
+                    </div>
+
+                    <Divider className="resume-divider" />
+
+                    <div className="resume-section">
+                        <RichTextField
+                            value={`<h2>${resumeData.education.heading}</h2>`}
+                            onChange={(value) => handleSectionChange("education", "heading", value.replace(/<[^>]*>/g, ''))}
+                            isHeading={true}
+                        />
+                        <RichTextField
+                            value={resumeData.education.content}
+                            onChange={(value) => handleSectionChange("education", "content", value)}
+                        />
+                    </div>
+
+                    <Divider className="resume-divider" />
+
+                    <div className="resume-section">
+                        <RichTextField
+                            value={`<h2>${resumeData.additionalInfo.heading}</h2>`}
+                            onChange={(value) => handleSectionChange("additionalInfo", "heading", value.replace(/<[^>]*>/g, ''))}
+                            isHeading={true}
+                        />
+                        <RichTextField
+                            value={resumeData.additionalInfo.content}
+                            onChange={(value) => handleSectionChange("additionalInfo", "content", value)}
+                        />
+                    </div>
+
+                    <Divider className="resume-divider" />
                 </div>
-                <div className="resume-contact">
-                    <TextField
-                        fullWidth
-                        multiline
-                        value={resumeData.contact.content}
-                        onChange={(e) => handleSectionChange("contact", "content", e.target.value)}
-                        variant="standard"
-                        InputProps={{
-                            disableUnderline: true,
-                            style: { 
-                                color: '#555', 
-                                fontSize: '0.9em', 
-                                textAlign: 'center',
-                                fontFamily: 'Arial, sans-serif',
-                                whiteSpace: 'pre-wrap'
-                            },
-                        }}
-                        sx={{
-                            '& .MuiInputBase-root': {
-                                width: '70%',
-                                margin: '0 auto'
-                            },
-                            '& .MuiInputBase-input': {
-                                textAlign: 'center',
-                                padding: '0'
-                            }
-                        }}
-                    />
-                </div>
-
-                <Divider className="resume-divider" />
-
-                <div className="resume-section">
-                    <RichTextField
-                        value={`<h2>${resumeData.summary.heading}</h2>`}
-                        onChange={(value) => handleSectionChange("summary", "heading", value.replace(/<[^>]*>/g, ''))}
-                        isHeading={true}
-                    />
-                    <RichTextField
-                        value={resumeData.summary.content}
-                        onChange={(value) => handleSectionChange("summary", "content", value)}
-                    />
-                </div>
-
-                <Divider className="resume-divider" />
-
-                <div className="resume-section">
-                    <RichTextField
-                        value={`<h2>${resumeData.workExperience.heading}</h2>`}
-                        onChange={(value) => handleSectionChange("workExperience", "heading", value.replace(/<[^>]*>/g, ''))}
-                        isHeading={true}
-                    />
-                    <RichTextField
-                        value={resumeData.workExperience.content}
-                        onChange={(value) => handleSectionChange("workExperience", "content", value)}
-                    />
-                </div>
-
-                <Divider className="resume-divider" />
-
-                <div className="resume-section">
-                    <RichTextField
-                        value={`<h2>${resumeData.education.heading}</h2>`}
-                        onChange={(value) => handleSectionChange("education", "heading", value.replace(/<[^>]*>/g, ''))}
-                        isHeading={true}
-                    />
-                    <RichTextField
-                        value={resumeData.education.content}
-                        onChange={(value) => handleSectionChange("education", "content", value)}
-                    />
-                </div>
-
-                <Divider className="resume-divider" />
-
-                <div className="resume-section">
-                    <RichTextField
-                        value={`<h2>${resumeData.additionalInfo.heading}</h2>`}
-                        onChange={(value) => handleSectionChange("additionalInfo", "heading", value.replace(/<[^>]*>/g, ''))}
-                        isHeading={true}
-                    />
-                    <RichTextField
-                        value={resumeData.additionalInfo.content}
-                        onChange={(value) => handleSectionChange("additionalInfo", "content", value)}
-                    />
-                </div>
-
-                <Divider className="resume-divider" />
-            </div>
+            </Box>
         </div>
     );
 };
