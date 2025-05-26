@@ -90,6 +90,7 @@ const ProfessionalResumeBasic: React.FC = () => {
                             value={resumeData.name.content}
                             onChange={(value) => handleSectionChange("name", "content", value)}
                             isHeading={true}
+                            isNameHeading={true}
                         />
                     </div>
                     <div className="resume-contact">

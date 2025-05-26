@@ -43,13 +43,14 @@ interface RichTextFieldProps {
     value: string;
     onChange: (value: string) => void;
     isHeading?: boolean;
+    isNameHeading?: boolean;
 }
 
 interface EditorWithHTML {
     getHTML: () => string;
 }
 
-const RichTextField: React.FC<RichTextFieldProps> = ({ value, onChange, isHeading = false }) => {
+const RichTextField: React.FC<RichTextFieldProps> = ({ value, onChange, isHeading = false, isNameHeading = false }) => {
     const [colorAnchorEl, setColorAnchorEl] = useState<null | HTMLElement>(null);
 
     const editor = useEditor({
@@ -68,7 +69,7 @@ const RichTextField: React.FC<RichTextFieldProps> = ({ value, onChange, isHeadin
             Color,
             TextAlign.configure({
                 types: ['heading', 'paragraph'],
-                defaultAlignment: isHeading ? 'center' : 'left',
+                defaultAlignment: isNameHeading ? 'center' : 'left',
             }),
         ],
         content: value,
