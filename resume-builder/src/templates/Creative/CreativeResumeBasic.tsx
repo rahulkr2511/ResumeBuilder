@@ -12,6 +12,15 @@ import { get } from 'http';
 import { getCreativeResumeBasicData, setCreativeResumeBasicData } from './CreativeResumeBasicSlice';
 import { downloadResumePDF } from '../../utils/downloadResumePDF';
 
+/**
+ * 
+ * @returns The CreateResumeBasic component renders a creative resume template
+ *          allowing users to edit their resume details, save changes, and download it as a PDF.
+ *          It uses Material-UI for styling and layout, and integrates with Redux for state management.
+ *          The component includes features like rich text editing, dynamic section handling,
+ *          and PDF generation with exact dimensions and styles.
+ */
+
 const CreateResumeBasic = () => {
     const resumeRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
@@ -83,7 +92,6 @@ const CreateResumeBasic = () => {
                         flexDirection: { xs: 'column', md: 'row' },
                         gap: 0
                     }}>
-                        {/* Left Column - 2/5 width */}
                         <Box sx={{ 
                             flex: { xs: '1 1 100%', md: '0 0 40%' },
                             display: 'flex',
@@ -91,7 +99,6 @@ const CreateResumeBasic = () => {
                             borderRadius: { xs: '8px 8px 0 0', md: '8px 0 0 8px' },
                             overflow: 'hidden'
                         }}>
-                            {/* Top Section - Contact */}
                             <Box sx={{ 
                                 backgroundColor: Colors.BACKGROUND.CREAM,
                                 color: Colors.TEXT.DARK,
@@ -114,8 +121,6 @@ const CreateResumeBasic = () => {
                                     />
                                 </Box>
                             </Box>
-
-                            {/* Bottom Section - Skills, Certification, and Membership */}
                             <Box sx={{ 
                                 backgroundColor: Colors.BACKGROUND.WHITE,
                                 color: Colors.TEXT.DARK,
@@ -125,7 +130,6 @@ const CreateResumeBasic = () => {
                                 flexDirection: 'column',
                                 gap: 4
                             }}>
-                                {/* Skills Section */}
                                 <Box>
                                     <Box sx={{ mb: 2 }}>
                                         <RichTextField
@@ -140,8 +144,6 @@ const CreateResumeBasic = () => {
                                         onChange={(value) => handleSectionChange("skills", "content", value)}
                                     />
                                 </Box>
-
-                                {/* Certification Section */}
                                 <Box>
                                     <Box sx={{ mb: 2 }}>
                                         <RichTextField
@@ -156,8 +158,6 @@ const CreateResumeBasic = () => {
                                         onChange={(value) => handleSectionChange("certification", "content", value)}
                                     />
                                 </Box>
-
-                                {/* Membership Section */}
                                 <Box>
                                     <Box sx={{ mb: 2 }}>
                                         <RichTextField
@@ -174,16 +174,13 @@ const CreateResumeBasic = () => {
                                 </Box>
                             </Box>
                         </Box>
-
-                        {/* Right Column - 3/5 width */}
                         <Box sx={{ 
                             flex: { xs: '1 1 100%', md: '0 0 60%' },
                             backgroundColor: Colors.BACKGROUND.WHITE,
                             padding: '32px',
-                            borderRadius: { xs: '0 0 8px 8px', md: '0 8px 8px 0' },  // Adjust border radius
-                            borderTop: { xs: 'none', md: 'none' }  // Remove top border on desktop
+                            borderRadius: { xs: '0 0 8px 8px', md: '0 8px 8px 0' },  
+                            borderTop: { xs: 'none', md: 'none' }  
                         }}>
-                            {/* Name Section */}
                             <Box sx={{ 
                                 mb: 4,
                                 backgroundColor: Colors.BACKGROUND.OLIVE_GREEN,
@@ -208,8 +205,6 @@ const CreateResumeBasic = () => {
                                     onChange={(value) => handleSectionChange("name", "content", value)}
                                 />
                             </Box>
-
-                            {/* Summary Section */}
                             <Box sx={{ mb: 4 }}>
                                 <Box sx={{ mb: 2 }}>
                                     <RichTextField
@@ -224,8 +219,6 @@ const CreateResumeBasic = () => {
                                     onChange={(value) => handleSectionChange("summary", "content", value)}
                                 />
                             </Box>
-
-                            {/* Experience Section */}
                             <Box sx={{ mb: 4 }}>
                                 <Box sx={{ mb: 2 }}>
                                     <RichTextField
@@ -240,8 +233,6 @@ const CreateResumeBasic = () => {
                                     onChange={(value) => handleSectionChange("experience", "content", value)}
                                 />
                             </Box>
-
-                            {/* Education Section */}
                             <Box sx={{ mb: 4 }}>
                                 <Box sx={{ mb: 2 }}>
                                     <RichTextField
@@ -258,7 +249,6 @@ const CreateResumeBasic = () => {
                             </Box>
                         </Box>
                     </Box>
-                    {/* Footer */}
                     <Box sx={{ 
                         height: '30px',
                         backgroundColor: Colors.BACKGROUND.OLIVE_GREEN,
