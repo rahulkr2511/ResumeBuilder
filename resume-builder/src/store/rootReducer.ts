@@ -1,5 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import professionalBasicReducer from "../templates/Professional/ProfessionalResumeBasicSlice";
+import creativeBasicReducer from "../templates/Creative/CreativeResumeBasicSlice";
  /**
   * * This file combines all the reducers from different slices of the application.
   * * It uses Redux Toolkit's combineReducers function to create a single root reducer.
@@ -11,7 +12,8 @@ const appReducer = combineReducers({
     /**
      * Add other reducers from all slcices here
      *  */ 
-    professionalBasic: professionalBasicReducer
+    professionalBasic: professionalBasicReducer,
+    creativeBasic: creativeBasicReducer,
 });
 
 export default appReducer;

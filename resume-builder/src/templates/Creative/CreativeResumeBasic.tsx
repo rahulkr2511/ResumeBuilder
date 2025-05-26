@@ -4,15 +4,19 @@ import { useExtractComputedStyles } from '../../customHooks/useExtractComputedSt
 import { Box, Divider } from '@mui/material';
 import ResumeHeader from '../../components/ResumeHeader';
 import ProfileImagePicker from '../../utils/ProfileImagePicker';
-import { defaultResumeContent } from '../../utils/CreativeResumeDefaultContent';
 import { ICreativeResumeData } from '../../utils/CreativeResumeDefaultContent';
 import RichTextField from '../../utils/RichTextField';
 import { Colors } from '../../constants/Colors';
+import { useDispatch, useSelector } from 'react-redux';
+import { get } from 'http';
+import { getCreativeResumeBasicData, setCreativeResumeBasicData } from './CreativeResumeBasicSlice';
 
 const CreateResumeBasic = () => {
     const resumeRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
-    const [resumeData, setResumeData] = React.useState(defaultResumeContent);
+    const dispatch = useDispatch();
+    const defaultResumeContentFromStore = useSelector(getCreativeResumeBasicData);
+    const [resumeData, setResumeData] = React.useState<ICreativeResumeData>(defaultResumeContentFromStore);
     const [profileImage, setProfileImage] = useState<string>('');
     
     const handleSectionChange = (section: keyof ICreativeResumeData, field: 'heading' | 'content', value: string) => {
@@ -42,7 +46,7 @@ const CreateResumeBasic = () => {
     }
 
     const handleSave = () => {
-        // TODO: Implement save functionality
+        dispatch(setCreativeResumeBasicData(resumeData));
     }
 
     const handleDownloadPDF = async () => {
