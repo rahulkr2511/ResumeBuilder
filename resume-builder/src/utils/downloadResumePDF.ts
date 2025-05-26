@@ -1,6 +1,31 @@
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 
+
+/**
+ * This is a utility function to download a resume as a PDF.
+ * It takes a reference to the resume element, extracts computed styles,
+ * and handles the PDF generation process.
+ * It also provides options for custom filename and callback functions for start, complete, and error events.
+ * * @param {DownloadResumePDFOptions} options - The options for downloading the resume PDF.
+ * @param {React.RefObject<HTMLDivElement | null>} options.resumeRef - The reference to the resume element.
+ * @param {Function} options.extractComputedStyles - A function to extract computed styles from the resume element.
+ * @param {string} [options.filename] - The name of the file to save the PDF as. Defaults to 'resume.pdf'.
+ * @param {Function} [options.onStart] - Callback function to execute when the download starts.
+ * @param {Function} [options.onComplete] - Callback function to execute when the download completes.
+ * @param {Function} [options.onError] - Callback function to execute when an error occurs during the download.
+ * @returns {Promise<void>} - A promise that resolves when the PDF is downloaded.
+ * @throws {Error} - Throws an error if the PDF generation fails.
+ * @description
+ * This function uses html2canvas to render the resume element to a canvas,
+ * then converts that canvas to an image and uses jsPDF to create a PDF document.
+ * It hides the resume action buttons during the download process and restores them afterward.
+ * It also converts editable text fields in the resume to static text to ensure proper rendering in the PDF.
+ * The PDF is saved with the specified filename or 'resume.pdf' by default.
+ * It also provides options for handling start, complete, and error events during the download process. 
+ * 
+ */
+
 interface DownloadResumePDFOptions {
     resumeRef: React.RefObject<HTMLDivElement | null>;
     extractComputedStyles: (element: HTMLElement) => string;
