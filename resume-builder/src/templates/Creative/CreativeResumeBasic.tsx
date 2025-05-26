@@ -10,6 +10,7 @@ import { Colors } from '../../constants/Colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { get } from 'http';
 import { getCreativeResumeBasicData, setCreativeResumeBasicData } from './CreativeResumeBasicSlice';
+import { downloadResumePDF } from '../../utils/downloadResumePDF';
 
 const CreateResumeBasic = () => {
     const resumeRef = useRef<HTMLDivElement>(null);
@@ -50,7 +51,13 @@ const CreateResumeBasic = () => {
     }
 
     const handleDownloadPDF = async () => {
-        // TODO: Implement PDF download functionality
+       await downloadResumePDF({
+                   resumeRef,
+                   extractComputedStyles,
+                   onError: (error) => {
+                       console.error('Error generating PDF:', error);
+                   }
+               });
     }
 
     return (

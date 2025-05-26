@@ -8,7 +8,6 @@ interface ProfileImagePickerProps {
     size?: number;  // Size in pixels
     containerStyle?: React.CSSProperties;
     imageStyle?: React.CSSProperties;
-    buttonStyle?: React.CSSProperties;
     tooltipText?: string;
     backgroundColor?: string;
     borderRadius?: string;
@@ -19,8 +18,7 @@ const ProfileImagePicker: React.FC<ProfileImagePickerProps> = ({
     size = 150,
     containerStyle,
     imageStyle,
-    buttonStyle,
-    tooltipText = "Add Photo",
+    tooltipText = "Click to add photo",
     backgroundColor = Colors.BACKGROUND.LIGHT,
     borderRadius = '75px 75px 0 0'
 }) => {
@@ -53,75 +51,64 @@ const ProfileImagePicker: React.FC<ProfileImagePickerProps> = ({
             position: 'relative',
             ...containerStyle
         }}>
-            <Box
-                sx={{
-                    width: size,
-                    height: size,
-                    position: 'relative',
-                    overflow: 'hidden',
-                    backgroundColor,
-                    borderRadius,
-                    ...imageStyle
-                }}
-            >
-                {imageUrl ? (
-                    <Box
-                        component="img"
-                        src={imageUrl}
-                        alt="Profile"
-                        sx={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover',
-                            position: 'relative',
-                            zIndex: 0,
-                            transform: 'scale(1.2)',
-                            transformOrigin: 'center center'
-                        }}
-                    />
-                ) : (
-                    <Box
-                        sx={{
-                            width: '100%',
-                            height: '100%',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            position: 'relative',
-                            zIndex: 0,
-                            backgroundColor
-                        }}
-                    >
-                        <PhotoCameraIcon sx={{ fontSize: size * 0.27, color: Colors.TEXT.DARK }} />
-                    </Box>
-                )}
-                <Tooltip title={tooltipText}>
-                    <IconButton
-                        onClick={handleImageClick}
-                        sx={{
-                            position: 'absolute',
-                            bottom: 8,
-                            right: 8,
-                            backgroundColor: Colors.BACKGROUND.WHITE,
-                            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                            '&:hover': {
-                                backgroundColor: Colors.BACKGROUND.LIGHT
-                            },
-                            zIndex: 2,
-                            ...buttonStyle
-                        }}
-                    >
-                        <PhotoCameraIcon />
-                    </IconButton>
-                </Tooltip>
-                <input
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handleFileChange}
-                    accept="image/*"
-                    style={{ display: 'none' }}
-                />
-            </Box>
+            <Tooltip title={tooltipText}>
+                <Box
+                    onClick={handleImageClick}
+                    sx={{
+                        width: size,
+                        height: size,
+                        position: 'relative',
+                        overflow: 'hidden',
+                        backgroundColor,
+                        borderRadius,
+                        cursor: 'pointer',
+                        transition: 'opacity 0.2s',
+                        '&:hover': {
+                            opacity: 0.9
+                        },
+                        ...imageStyle
+                    }}
+                >
+                    {imageUrl ? (
+                        <Box
+                            component="img"
+                            src={imageUrl}
+                            alt="Profile"
+                            sx={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover',
+                                position: 'relative',
+                                zIndex: 0,
+                                transform: 'scale(1.2)',
+                                transformOrigin: 'center center'
+                            }}
+                        />
+                    ) : (
+                        <Box
+                            sx={{
+                                width: '100%',
+                                height: '100%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                position: 'relative',
+                                zIndex: 0,
+                                backgroundColor
+                            }}
+                        >
+                            <PhotoCameraIcon sx={{ fontSize: size * 0.27, color: Colors.TEXT.DARK }} />
+                        </Box>
+                    )}
+                </Box>
+            </Tooltip>
+            <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                accept="image/*"
+                style={{ display: 'none' }}
+            />
         </Box>
     );
 };
