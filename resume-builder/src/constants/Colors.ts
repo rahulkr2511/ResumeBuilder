@@ -42,7 +42,8 @@ export const Colors = {
     BLUE: {
         PRIMARY: '#1976d2',    // Material-UI primary blue
         SECONDARY: '#42a5f5',
-        LIGHT: '#e3f2fd'
+        LIGHT: '#e3f2fd',
+        DARK: '#064f96'       // Dark blue for business theme
     }
 } as const;
 
