@@ -135,10 +135,9 @@ const BusinessResumeBasic = () => {
                                     />
                                 </Box>
                                 <Box sx={{ color: '#000000' }}>
-                                    <div
-                                        className="contact-section"
-                                        style={{ color: '#000000' }}
-                                        dangerouslySetInnerHTML={{ __html: resumeData.contact.content }}
+                                    <RichTextField
+                                        value={resumeData.contact.content.replace(/(<[^>]*>)([^<]*)(<\/[^>]*>)/g, '$1 $2 $3')}
+                                        onChange={(value) => handleSectionChange("contact", "content", value)}
                                     />
                                 </Box>
                             </Box>
