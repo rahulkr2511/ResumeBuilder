@@ -158,7 +158,7 @@ const BusinessResumeBasic = () => {
                                         />
                                     </div>
                                     <RichTextField
-                                        value={`<div style="text-align: left; font-size: 16px; margin: 0; width: 100%; color: #000000;">${resumeData.title.content}</div>`}
+                                        value={`<div style="text-align: left; font-size: 16px; margin: 0; width: 100%; color: #000000; font-style: italic">${resumeData.title.content}</div>`}
                                         onChange={(value) => handleSectionChange("title", "content", value.replace(/<[^>]*>/g, ''))}
                                         isHeading={true}
                                     />
