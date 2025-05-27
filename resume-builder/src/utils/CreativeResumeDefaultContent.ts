@@ -36,7 +36,7 @@ export const defaultResumeContent: ICreativeResumeData = {
           
           <div style="display: flex; align-items: center; gap: 8px; padding: 8px 0;">
             <span style="font-weight: bold;">📍</span>
-            <span>123 Anywhere St., Any City, ST 12345</span>
+            <span>123 Anywhere St., Any City</span>
           </div>
         </div>
       `,

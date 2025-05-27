@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { get } from 'http';
 import { getCreativeResumeBasicData, setCreativeResumeBasicData } from './CreativeResumeBasicSlice';
 import { downloadResumePDF } from '../../utils/downloadResumePDF';
+import '../../styles/ProfessionalResumeBasic.css';  // Common styles
+import '../../styles/CreativeResumeBasic.css';      // Creative-specific styles
 
 /**
  * 
@@ -194,7 +196,7 @@ const CreateResumeBasic = () => {
                             }}>
                                 <Box sx={{ mb: 2 }}>
                                     <RichTextField
-                                        value={`<h1 style="text-align: left; font-size: 18px; margin: 0;">${resumeData.name.heading || 'NAME'}</h1>`}
+                                        value={`<h1 style="text-align: left; font-size: 18px; margin: 0; color: white;">${resumeData.name.heading || 'NAME'}</h1>`}
                                         onChange={(value) => handleSectionChange("name", "heading", value.replace(/<[^>]*>/g, ''))}
                                         isHeading={true}
                                     />

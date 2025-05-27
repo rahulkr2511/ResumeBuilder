@@ -1,0 +1,20 @@
+/* Creative Resume specific styles */
+.creative-resume {
+    /* Inherit base styles from ProfessionalResumeBasic.css */
+}
+
+/* Override heading styles for the olive green section */
+.resume-container .ProseMirror h1 {
+    color: white !important;
+}
+
+/* Add Creative Resume specific styles here */
+.creative-resume .name-heading {
+    /* Add creative resume name heading styles */
+}
+
+.creative-resume .contact-section {
+    /* Add creative resume contact section styles */
+}
+
+/* Add any other creative resume specific styles */

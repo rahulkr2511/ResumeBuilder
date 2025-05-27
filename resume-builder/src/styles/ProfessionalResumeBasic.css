@@ -185,11 +185,6 @@
     padding: 0;
 }
 
-/* Add a specific style for the name content */
-.resume-heading-editor .ProseMirror h1[style*="color"] {
-    color: #004c99 !important;
-}
-
 /* List styles */
 .rich-text-editor ul,
 .rich-text-editor ol,
@@ -234,69 +229,5 @@
 
 .ProseMirror ol li::marker {
     color: #000000;
-}
-
-/* Name heading specific styles */
-.name-heading {
-    color: #000000 !important;
-    font-weight: bold !important;
-}
-
-.resume-heading-editor .ProseMirror .name-heading {
-    color: #000000 !important;
-    font-weight: bold !important;
-}
-
-.business-resume .name-heading .ProseMirror h1 {
-    font-size: 32px !important;
-    color: #000000 !important;
-    font-weight: bold !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-/* Contact section styles */
-.contact-section {
-    color: #000000 !important;
-}
-
-.contact-section p, 
-.contact-section div, 
-.contact-section span {
-    color: #000000 !important;
-    margin: 8px 0 !important;
-}
-
-.contact-section i,
-.contact-section svg {
-    margin-right: 8px !important;
-    display: inline-block !important;
-    vertical-align: top !important;
-    margin-top: 4px !important;
-}
-
-.rich-text-editor .ProseMirror i,
-.rich-text-editor .ProseMirror svg {
-    margin-right: 8px !important;
-    display: inline-block !important;
-    vertical-align: top !important;
-    margin-top: 4px !important;
-}
-
-.rich-text-editor .ProseMirror p {
-    display: flex !important;
-    align-items: flex-start !important;
-    margin: 8px 0 !important;
-}
-
-.rich-text-editor .ProseMirror p > i,
-.rich-text-editor .ProseMirror p > svg {
-    flex-shrink: 0 !important;
-}
-
-.rich-text-editor .ProseMirror p > span {
-    flex: 1 !important;
-    min-width: 0 !important;
-    word-wrap: break-word !important;
 }
 

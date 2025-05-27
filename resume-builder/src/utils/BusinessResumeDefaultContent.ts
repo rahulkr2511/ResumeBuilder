@@ -51,21 +51,10 @@ export const defaultResumeContent: IBusinessResumeData = {
     },
     contact: {
       heading: "Contact Me",
-      content: `<div style="display: flex; flex-direction: column;">
-      <div style="display: flex; align-items: center; padding: 8px 0;">
-        <span style="font-weight: bold;">📞</span>
-        <span style="color: ${Colors.BLUE.DARK};"> +123-456-7890</span>
-      </div>
-      
-      <div style="display: flex; align-items: center; padding: 8px 0;">
-        <span style="font-weight: bold;">✉️</span>
-        <span style="color: ${Colors.BLUE.DARK};"> hello@reallygreatsite.com</span>
-      </div>
-      
-      <div style="display: flex; align-items: center; padding: 8px 0;">
-        <span style="font-weight: bold;">📍</span>
-        <span style="color: ${Colors.BLUE.DARK};"> 123 Anywhere St., Any City, ST 12345</span>
-      </div>
-    </div>`
+      content: `<div class="contact-list">
+        <div class="contact-line"><span class="icon">📞</span><span class="text">+123-456-7890</span></div>
+        <div class="contact-line"><span class="icon">✉️</span><span class="text">hello@greatsite.com</span></div>
+        <div class="contact-line"><span class="icon">📍</span><span class="text">123 Anywhere</span></div>
+      </div>`
     }
   };
