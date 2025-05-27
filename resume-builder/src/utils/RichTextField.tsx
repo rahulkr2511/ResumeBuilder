@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IconButton, Paper, Tooltip, Select, MenuItem, Divider, Popover } from '@mui/material';
+import { IconButton, Paper, Tooltip, Select, MenuItem, Divider, Popover, Box } from '@mui/material';
 import FormatBoldIcon from '@mui/icons-material/FormatBold';
 import FormatItalicIcon from '@mui/icons-material/FormatItalic';
 import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined';
@@ -39,18 +39,28 @@ const COLORS = [
     '#546e7a', // Gray
 ];
 
+// Define a custom interface for the editor with only the methods we need
+interface CustomEditor {
+    getHTML: () => string;
+    chain: () => {
+        focus: () => {
+            setColor: (color: string) => {
+                run: () => void;
+            };
+        };
+    };
+}
+
 interface RichTextFieldProps {
     value: string;
     onChange: (value: string) => void;
     isHeading?: boolean;
     isNameHeading?: boolean;
+    style?: React.CSSProperties;
+    defaultColor?: string;
 }
 
-interface EditorWithHTML {
-    getHTML: () => string;
-}
-
-const RichTextField: React.FC<RichTextFieldProps> = ({ value, onChange, isHeading = false, isNameHeading = false }) => {
+const RichTextField: React.FC<RichTextFieldProps> = ({ value, onChange, isHeading = false, isNameHeading = false, style, defaultColor }) => {
     const [colorAnchorEl, setColorAnchorEl] = useState<null | HTMLElement>(null);
 
     const editor = useEditor({
@@ -73,14 +83,19 @@ const RichTextField: React.FC<RichTextFieldProps> = ({ value, onChange, isHeadin
             }),
         ],
         content: value,
-        onUpdate: ({ editor }: { editor: unknown }) => {
-            onChange((editor as EditorWithHTML).getHTML());
+        onUpdate: ({ editor }: { editor: CustomEditor }) => {
+            onChange(editor.getHTML());
         },
         editorProps: {
             attributes: {
                 class: isHeading ? 'resume-heading-editor' : 'rich-text-editor',
             },
         },
+        onCreate: ({ editor }: { editor: CustomEditor }) => {
+            if (defaultColor && editor) {
+                editor.chain().focus().setColor(defaultColor).run();
+            }
+        }
     });
 
     if (!editor) {
@@ -110,7 +125,11 @@ const RichTextField: React.FC<RichTextFieldProps> = ({ value, onChange, isHeadin
     };
 
     return (
-        <div className="rich-text-container">
+        <Box sx={{ position: 'relative' }}>
+            <EditorContent 
+                editor={editor} 
+                style={style}
+            />
             {editor && (
                 <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }} className="bubble-menu">
                     <Paper elevation={3} sx={{ display: 'flex', gap: 1, p: 0.5 }}>
@@ -283,8 +302,7 @@ const RichTextField: React.FC<RichTextFieldProps> = ({ value, onChange, isHeadin
                     </Paper>
                 </BubbleMenu>
             )}
-            <EditorContent editor={editor} className={isHeading ? 'resume-heading-editor' : 'rich-text-editor'} />
-        </div>
+        </Box>
     );
 };
 

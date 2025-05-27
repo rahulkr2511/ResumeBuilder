@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useExtractComputedStyles } from '../../customHooks/useExtractComputedStyles';
 import { Box, Divider } from '@mui/material';
 import ResumeHeader from '../../components/ResumeHeader';
+import ProfileImagePicker from '../../utils/ProfileImagePicker';
 import { getBusinessBasicResumeData, setBusinessBasicResumeData } from './BusinessResumeBasicSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { IBusinessResumeData } from '../../utils/BusinessResumeDefaultContent';
@@ -14,6 +15,7 @@ const BusinessResumeBasic = () => {
     const resumeDataFromStore = useSelector(getBusinessBasicResumeData);
     const dispatch = useDispatch();
     const [resumeData, setResumeData] = useState<IBusinessResumeData>(resumeDataFromStore);
+    const [profileImage, setProfileImage] = useState<string>('');
     const resumeRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
 
@@ -25,6 +27,10 @@ const BusinessResumeBasic = () => {
                 [field]: value
             }
         }));
+    };
+
+    const handleImageSelect = (imageUrl: string) => {
+        setProfileImage(imageUrl);
     };
 
     /**
@@ -70,7 +76,7 @@ const BusinessResumeBasic = () => {
                     backgroundColor: Colors.BACKGROUND.LIGHT
                 }}
             >
-                <div className="resume-container" ref={resumeRef}>
+                <div className="resume-container business-resume" ref={resumeRef}>
                     <Box sx={{ 
                         display: 'flex',
                         flexDirection: { xs: 'column', md: 'row' },
@@ -83,7 +89,14 @@ const BusinessResumeBasic = () => {
                             flex: { xs: '1 1 100%', md: '0 0 30%' },
                             padding: '32px',
                         }}>
-                            <div className="photo-placeholder">[Upload Image]</div>
+                            <ProfileImagePicker 
+                                onImageSelect={handleImageSelect}
+                                size={180}
+                                backgroundColor={Colors.BACKGROUND.LIGHT}
+                                containerStyle={{ marginBottom: '32px' }}
+                                tooltipText="Add Profile Photo"
+                                borderRadius="50%"
+                            />
 
                             <Box sx={{ mb: 4 }}>
                                 <Box sx={{ 
@@ -99,10 +112,12 @@ const BusinessResumeBasic = () => {
                                         isHeading={true}
                                     />
                                 </Box>
-                                <RichTextField
-                                    value={resumeData.profile.content}
-                                    onChange={(value) => handleSectionChange("profile", "content", value)}
-                                />
+                                <Box sx={{ color: '#000000' }}>
+                                    <RichTextField
+                                        value={resumeData.profile.content}
+                                        onChange={(value) => handleSectionChange("profile", "content", value)}
+                                    />
+                                </Box>
                             </Box>
 
                             <Box sx={{ mb: 4 }}>
@@ -119,10 +134,13 @@ const BusinessResumeBasic = () => {
                                         isHeading={true}
                                     />
                                 </Box>
-                                <div
-                                    className="contact-section"
-                                    dangerouslySetInnerHTML={{ __html: resumeData.contact.content }}
-                                />
+                                <Box sx={{ color: '#000000' }}>
+                                    <div
+                                        className="contact-section"
+                                        style={{ color: '#000000' }}
+                                        dangerouslySetInnerHTML={{ __html: resumeData.contact.content }}
+                                    />
+                                </Box>
                             </Box>
                         </Box>
 
@@ -132,99 +150,111 @@ const BusinessResumeBasic = () => {
                             backgroundColor: Colors.BACKGROUND.WHITE
                         }}>
                             <Box sx={{ mb: 4 }}>
-                                <RichTextField
-                                    value={resumeData.name.content}
-                                    onChange={(value) => handleSectionChange("name", "content", value)}
-                                    isHeading={true}
-                                />
-                                <RichTextField
-                                    value={resumeData.title.content}
-                                    onChange={(value) => handleSectionChange("title", "content", value)}
-                                    isHeading={true}
-                                />
-                            </Box>
-
-                            <Box sx={{ mb: 4 }}>
-                                <Box sx={{ mb: 2 }}>
-                                    <RichTextField
-                                        value={`<div style="text-align: left; font-size: 18px; font-weight: bold; margin: 0; width: 100%;">Education</div>`}
-                                        onChange={(value) => handleSectionChange("education1", "heading", value.replace(/<[^>]*>/g, ''))}
-                                        isHeading={true}
-                                    />
-                                    <Divider sx={{ borderColor: 'black', borderWidth: 1, mt: 1 }} />
-                                </Box>
-                                <Box sx={{ mb: 3 }}>
-                                    <RichTextField
-                                        value={resumeData.education1.heading}
-                                        onChange={(value) => handleSectionChange("education1", "heading", value)}
-                                        isHeading={true}
-                                    />
-                                    <RichTextField
-                                        value={resumeData.education1.content}
-                                        onChange={(value) => handleSectionChange("education1", "content", value)}
-                                    />
-                                </Box>
                                 <Box>
+                                    <div className="name-heading">
+                                        <RichTextField
+                                            value={`<h1 style="color: #000000; font-weight: bold;">${resumeData.name.content}</h1>`}
+                                            onChange={(value) => handleSectionChange("name", "content", value.replace(/<[^>]*>/g, ''))}
+                                        />
+                                    </div>
                                     <RichTextField
-                                        value={resumeData.education2.heading}
-                                        onChange={(value) => handleSectionChange("education2", "heading", value)}
+                                        value={`<div style="text-align: left; font-size: 16px; margin: 0; width: 100%; color: #000000;">${resumeData.title.content}</div>`}
+                                        onChange={(value) => handleSectionChange("title", "content", value.replace(/<[^>]*>/g, ''))}
                                         isHeading={true}
-                                    />
-                                    <RichTextField
-                                        value={resumeData.education2.content}
-                                        onChange={(value) => handleSectionChange("education2", "content", value)}
                                     />
                                 </Box>
                             </Box>
 
                             <Box sx={{ mb: 4 }}>
                                 <Box sx={{ mb: 2 }}>
-                                    <RichTextField
-                                        value={`<div style="text-align: left; font-size: 18px; font-weight: bold; margin: 0; width: 100%;">${resumeData.language.heading}</div>`}
-                                        onChange={(value) => handleSectionChange("language", "heading", value.replace(/<[^>]*>/g, ''))}
-                                        isHeading={true}
-                                    />
-                                    <Divider sx={{ borderColor: 'black', borderWidth: 1, mt: 1 }} />
+                                    <Box sx={{ 
+                                        backgroundColor: Colors.BLUE.DARK,
+                                        padding: '8px 16px',
+                                        borderRadius: '4px',
+                                        color: Colors.TEXT.WHITE
+                                    }}>
+                                        <RichTextField
+                                            value={`<div style="text-align: left; font-size: 18px; font-weight: bold; margin: 0; width: 100%; color: ${Colors.TEXT.WHITE};">${resumeData.education.heading}</div>`}
+                                            onChange={(value) => handleSectionChange("education", "heading", value.replace(/<[^>]*>/g, ''))}
+                                            isHeading={true}
+                                        />
+                                    </Box>
                                 </Box>
-                                <RichTextField
-                                    value={resumeData.language.content}
-                                    onChange={(value) => handleSectionChange("language", "content", value)}
-                                />
+                                <Box sx={{ color: '#000000' }}>
+                                    <RichTextField
+                                        value={resumeData.education.content}
+                                        onChange={(value) => handleSectionChange("education", "content", value)}
+                                    />
+                                </Box>
                             </Box>
 
                             <Box sx={{ mb: 4 }}>
                                 <Box sx={{ mb: 2 }}>
-                                    <RichTextField
-                                        value={`<div style="text-align: left; font-size: 18px; font-weight: bold; margin: 0; width: 100%;">${resumeData.computerSkills.heading}</div>`}
-                                        onChange={(value) => handleSectionChange("computerSkills", "heading", value.replace(/<[^>]*>/g, ''))}
-                                        isHeading={true}
-                                    />
-                                    <Divider sx={{ borderColor: 'black', borderWidth: 1, mt: 1 }} />
+                                    <Box sx={{ 
+                                        backgroundColor: Colors.BLUE.DARK,
+                                        padding: '8px 16px',
+                                        borderRadius: '4px',
+                                        color: Colors.TEXT.WHITE
+                                    }}>
+                                        <RichTextField
+                                            value={`<div style="text-align: left; font-size: 18px; font-weight: bold; margin: 0; width: 100%; color: ${Colors.TEXT.WHITE};">${resumeData.language.heading}</div>`}
+                                            onChange={(value) => handleSectionChange("language", "heading", value.replace(/<[^>]*>/g, ''))}
+                                            isHeading={true}
+                                        />
+                                    </Box>
                                 </Box>
-                                <RichTextField
-                                    value={resumeData.computerSkills.content}
-                                    onChange={(value) => handleSectionChange("computerSkills", "content", value)}
-                                />
+                                <Box sx={{ color: '#000000' }}>
+                                    <RichTextField
+                                        value={resumeData.language.content}
+                                        onChange={(value) => handleSectionChange("language", "content", value)}
+                                    />
+                                </Box>
                             </Box>
 
                             <Box sx={{ mb: 4 }}>
                                 <Box sx={{ mb: 2 }}>
-                                    <RichTextField
-                                        value={`<div style="text-align: left; font-size: 18px; font-weight: bold; margin: 0; width: 100%;">Work Experience</div>`}
-                                        onChange={(value) => handleSectionChange("workExperience", "heading", value.replace(/<[^>]*>/g, ''))}
-                                        isHeading={true}
-                                    />
-                                    <Divider sx={{ borderColor: 'black', borderWidth: 1, mt: 1 }} />
+                                    <Box sx={{ 
+                                        backgroundColor: Colors.BLUE.DARK,
+                                        padding: '8px 16px',
+                                        borderRadius: '4px',
+                                        color: Colors.TEXT.WHITE
+                                    }}>
+                                        <RichTextField
+                                            value={`<div style="text-align: left; font-size: 18px; font-weight: bold; margin: 0; width: 100%; color: ${Colors.TEXT.WHITE};">${resumeData.computerSkills.heading}</div>`}
+                                            onChange={(value) => handleSectionChange("computerSkills", "heading", value.replace(/<[^>]*>/g, ''))}
+                                            isHeading={true}
+                                        />
+                                    </Box>
                                 </Box>
-                                <RichTextField
-                                    value={resumeData.workExperience.heading}
-                                    onChange={(value) => handleSectionChange("workExperience", "heading", value)}
-                                    isHeading={true}
-                                />
-                                <RichTextField
-                                    value={resumeData.workExperience.content}
-                                    onChange={(value) => handleSectionChange("workExperience", "content", value)}
-                                />
+                                <Box sx={{ color: '#000000' }}>
+                                    <RichTextField
+                                        value={resumeData.computerSkills.content}
+                                        onChange={(value) => handleSectionChange("computerSkills", "content", value)}
+                                    />
+                                </Box>
+                            </Box>
+
+                            <Box sx={{ mb: 4 }}>
+                                <Box sx={{ mb: 2 }}>
+                                    <Box sx={{ 
+                                        backgroundColor: Colors.BLUE.DARK,
+                                        padding: '8px 16px',
+                                        borderRadius: '4px',
+                                        color: Colors.TEXT.WHITE
+                                    }}>
+                                        <RichTextField
+                                            value={`<div style="text-align: left; font-size: 18px; font-weight: bold; margin: 0; width: 100%; color: ${Colors.TEXT.WHITE};">${resumeData.workExperience.heading}</div>`}
+                                            onChange={(value) => handleSectionChange("workExperience", "heading", value.replace(/<[^>]*>/g, ''))}
+                                            isHeading={true}
+                                        />
+                                    </Box>
+                                </Box>
+                                <Box sx={{ color: '#000000' }}>
+                                    <RichTextField
+                                        value={resumeData.workExperience.content}
+                                        onChange={(value) => handleSectionChange("workExperience", "content", value)}
+                                    />
+                                </Box>
                             </Box>
                         </Box>
                     </Box>
