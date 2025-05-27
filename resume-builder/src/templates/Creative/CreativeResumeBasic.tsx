@@ -11,8 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { get } from 'http';
 import { getCreativeResumeBasicData, setCreativeResumeBasicData } from './CreativeResumeBasicSlice';
 import { downloadResumePDF } from '../../utils/downloadResumePDF';
-import '../../styles/ProfessionalResumeBasic.css';  // Common styles
-import '../../styles/CreativeResumeBasic.css';      // Creative-specific styles
+import '../../styles/CreativeResumeBasic.css';
 
 /**
  * 

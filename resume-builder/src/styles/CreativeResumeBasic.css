@@ -1,6 +1,9 @@
 /* Creative Resume specific styles */
+@import './common.css';
+
+/* Creative Resume specific styles */
 .creative-resume {
-    /* Inherit base styles from ProfessionalResumeBasic.css */
+    /* Add creative resume specific styles */
 }
 
 /* Override heading styles for the olive green section */
@@ -8,11 +11,12 @@
     color: white !important;
 }
 
-/* Add Creative Resume specific styles here */
+/* Creative Resume specific name heading styles */
 .creative-resume .name-heading {
     /* Add creative resume name heading styles */
 }
 
+/* Creative Resume specific contact section styles */
 .creative-resume .contact-section {
     /* Add creative resume contact section styles */
 }

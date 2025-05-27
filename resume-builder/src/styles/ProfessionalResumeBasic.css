@@ -1,3 +1,7 @@
+/* Professional Resume specific styles */
+@import './common.css';
+
+/* Professional Resume specific styles */
 .resume-wrapper {
     min-height: 100vh;
     background-color: #f5f5f5;
@@ -132,36 +136,7 @@
     margin: 0;
 }
 
-/* Heading styles */
-.resume-heading-editor {
-    width: 100%;
-    font-family: Arial, sans-serif;
-}
-
-.resume-heading-editor h1 {
-    font-size: 36px;
-    font-weight: bold;
-    color: #000000;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
-
-.resume-heading-editor h2 {
-    font-size: 24px;
-    font-weight: bold;
-    color: #000000;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
-
-.resume-heading-editor p {
-    margin: 0;
-    padding: 0;
-}
-
-/* Ensure the heading styles are preserved in the editor */
+/* Professional Resume specific heading styles */
 .resume-heading-editor .ProseMirror h1 {
     font-size: 36px;
     font-weight: bold;

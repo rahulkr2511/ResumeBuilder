@@ -10,8 +10,7 @@ import { IBusinessResumeData } from '../../utils/BusinessResumeDefaultContent';
 import RichTextField from '../../utils/RichTextField';
 import { Colors } from '../../constants/Colors';
 import { downloadResumePDF } from '../../utils/downloadResumePDF';
-import '../../styles/ProfessionalResumeBasic.css';  // Common styles
-import '../../styles/BusinessResumeBasic.css';      // Business-specific styles
+import '../../styles/BusinessResumeBasic.css';
 
 const BusinessResumeBasic = () => {
     const resumeDataFromStore = useSelector(getBusinessBasicResumeData);

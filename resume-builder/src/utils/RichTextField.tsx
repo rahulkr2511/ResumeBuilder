@@ -17,7 +17,7 @@ import Underline from '@tiptap/extension-underline';
 import TextStyle from '@tiptap/extension-text-style';
 import FontSize from '@tiptap/extension-font-size';
 import Color from '@tiptap/extension-color';
-import '../styles/ProfessionalResumeBasic.css';
+import '../styles/common.css';
 
 /**
  * This component provides a rich text editor with formatting options

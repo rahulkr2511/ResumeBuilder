@@ -1,6 +1,9 @@
 /* Business Resume specific styles */
+@import './common.css';
+
+/* Business Resume specific styles */
 .business-resume {
-    /* Inherit base styles from ProfessionalResumeBasic.css */
+    /* Add business resume specific styles */
 }
 
 /* Business Resume name heading styles */
@@ -17,7 +20,7 @@
     padding: 0 !important;
 }
 
-/* Business Resume contact section styles */
+/* Business Resume specific contact section styles */
 .business-resume .contact-section {
     color: #000000 !important;
 }
@@ -85,49 +88,49 @@
   color: #000000 !important;
 }
 
-/* Contact grid layout - with higher specificity */
+/* Business Resume specific contact grid layout */
 .business-resume .contact-section .contact-grid,
 .business-resume .contact-section .ProseMirror .contact-grid {
-  display: grid !important;
-  grid-template-columns: auto 1fr !important;
-  gap: 8px !important;
-  align-items: start !important;
-  width: 100% !important;
+    display: grid !important;
+    grid-template-columns: auto 1fr !important;
+    gap: 8px !important;
+    align-items: start !important;
+    width: 100% !important;
 }
 
 .business-resume .contact-section .contact-icons,
 .business-resume .contact-section .ProseMirror .contact-icons {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 16px !important;
-  padding-top: 4px !important;
-  grid-column: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    padding-top: 4px !important;
+    grid-column: 1 !important;
 }
 
 .business-resume .contact-section .contact-details,
 .business-resume .contact-section .ProseMirror .contact-details {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 16px !important;
-  grid-column: 2 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    grid-column: 2 !important;
 }
 
 .business-resume .contact-section .contact-icons div,
 .business-resume .contact-section .ProseMirror .contact-icons div {
-  font-size: 16px !important;
-  font-weight: bold !important;
-  text-align: center !important;
-  min-width: 24px !important;
-  margin: 0 !important;
-  padding: 0 !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    min-width: 24px !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .business-resume .contact-section .contact-details div,
 .business-resume .contact-section .ProseMirror .contact-details div {
-  color: #000000 !important;
-  word-break: break-word !important;
-  margin: 0 !important;
-  padding: 0 !important;
+    color: #000000 !important;
+    word-break: break-word !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 /* Remove any conflicting styles */
@@ -141,43 +144,43 @@
   display: revert !important;
 }
 
-/* Contact table styles */
+/* Business Resume specific contact table styles */
 .business-resume .contact-section .contact-table,
 .business-resume .contact-section .ProseMirror .contact-table {
-  width: 100% !important;
-  border-collapse: collapse !important;
-  border-spacing: 0 !important;
+    width: 100% !important;
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
 }
 
 .business-resume .contact-section .contact-row,
 .business-resume .contact-section .ProseMirror .contact-row {
-  display: table-row !important;
-  margin-top: 16px !important;
+    display: table-row !important;
+    margin-top: 16px !important;
 }
 
 .business-resume .contact-section .contact-row:first-child,
 .business-resume .contact-section .ProseMirror .contact-row:first-child {
-  margin-top: 0 !important;
+    margin-top: 0 !important;
 }
 
 .business-resume .contact-section .contact-icon,
 .business-resume .contact-section .ProseMirror .contact-icon {
-  display: table-cell !important;
-  font-size: 16px !important;
-  font-weight: bold !important;
-  text-align: center !important;
-  padding: 8px 16px 8px 0 !important;
-  vertical-align: top !important;
-  width: 40px !important;
+    display: table-cell !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    padding: 8px 16px 8px 0 !important;
+    vertical-align: top !important;
+    width: 40px !important;
 }
 
 .business-resume .contact-section .contact-text,
 .business-resume .contact-section .ProseMirror .contact-text {
-  display: table-cell !important;
-  color: #000000 !important;
-  padding: 8px 0 !important;
-  vertical-align: top !important;
-  word-break: break-word !important;
+    display: table-cell !important;
+    color: #000000 !important;
+    padding: 8px 0 !important;
+    vertical-align: top !important;
+    word-break: break-word !important;
 }
 
 /* Remove any conflicting styles */
@@ -189,40 +192,40 @@
   padding: 0 !important;
 }
 
-/* Contact list styles */
+/* Business Resume specific contact list styles */
 .business-resume .contact-section .contact-list,
 .business-resume .contact-section .ProseMirror .contact-list {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 16px !important;
-  width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    width: 100% !important;
 }
 
 .business-resume .contact-section .contact-line,
 .business-resume .contact-section .ProseMirror .contact-line {
-  display: block !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  min-height: 24px !important;
-  color: #000000 !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 24px !important;
+    color: #000000 !important;
 }
 
 .business-resume .contact-section .contact-line .icon,
 .business-resume .contact-section .ProseMirror .contact-line .icon {
-  display: inline-block !important;
-  font-weight: bold !important;
-  margin-right: 16px !important;
-  vertical-align: top !important;
-  width: 24px !important;
-  text-align: center !important;
+    display: inline-block !important;
+    font-weight: bold !important;
+    margin-right: 16px !important;
+    vertical-align: top !important;
+    width: 24px !important;
+    text-align: center !important;
 }
 
 .business-resume .contact-section .contact-line .text,
 .business-resume .contact-section .ProseMirror .contact-line .text {
-  display: inline-block !important;
-  vertical-align: top !important;
-  max-width: calc(100% - 40px) !important;
-  word-wrap: break-word !important;
+    display: inline-block !important;
+    vertical-align: top !important;
+    max-width: calc(100% - 40px) !important;
+    word-wrap: break-word !important;
 }
 
 /* Remove any conflicting styles */

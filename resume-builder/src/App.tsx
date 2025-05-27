@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './styles/common.css';
 import { BrowserRouter as Router, Routes, Route, useParams, Navigate } from 'react-router-dom';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import Home from './components/Home';
