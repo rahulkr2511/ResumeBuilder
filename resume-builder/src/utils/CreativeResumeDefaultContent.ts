@@ -1,36 +1,17 @@
+
+interface ResumeSection {
+  heading: string;
+  content: string;
+}
 export interface ICreativeResumeData {
-name: {
-    heading: string;
-    content: string;
-    };
-contact: {
-    heading: string;
-    content: string;
-    };
-    summary: {
-    heading: string;
-    content: string;
-    };
-skills: {
-    heading: string;
-    content: string;
-    };
-certification: {
-    heading: string;   
-    content: string;
-    };
-membership: {
-    heading: string;
-    content: string;
-    };
-education: {
-    heading: string;
-    content: string;
-    };
-experience: {
-    heading: string;
-    content: string;
-    };
+    name: ResumeSection;
+    contact: ResumeSection;
+    summary: ResumeSection
+    skills: ResumeSection;
+    certification: ResumeSection;
+    membership: ResumeSection;
+    education: ResumeSection;
+    experience: ResumeSection;
 }
 
 

@@ -7,32 +7,18 @@
  * This content can be used as a starting point for creating a professional resume.
  */
 
+interface ResumeSection {
+    heading: string;
+    content: string;
+  }
 
 export interface IProfessionalResumeData {
-    name: {
-        heading: string;
-        content: string;
-    };
-    contact: {
-        heading: string;
-        content: string;
-    };
-    summary: {
-        heading: string;
-        content: string;
-    };
-    workExperience: {
-        heading: string;
-        content: string;
-    };
-    education: {
-        heading: string;
-        content: string;
-    };
-    additionalInfo: {
-        heading: string;
-        content: string;
-    };
+    name: ResumeSection;
+    contact: ResumeSection;
+    summary: ResumeSection
+    workExperience: ResumeSection;
+    education: ResumeSection;
+    additionalInfo: ResumeSection;
 }
 
 export const defaultResumeContent: IProfessionalResumeData = {
