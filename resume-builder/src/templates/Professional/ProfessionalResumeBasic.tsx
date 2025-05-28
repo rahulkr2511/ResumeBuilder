@@ -95,32 +95,19 @@ const ProfessionalResumeBasic: React.FC = () => {
                         />
                     </div>
                     <div className="resume-contact">
-                        <TextField
-                            fullWidth
-                            multiline
+                        <RichTextField
                             value={resumeData.contact.content}
-                            onChange={(e) => handleSectionChange("contact", "content", e.target.value)}
-                            variant="standard"
-                            InputProps={{
-                                disableUnderline: true,
-                                style: { 
-                                    color: '#555', 
-                                    fontSize: '0.9em', 
-                                    textAlign: 'center',
-                                    fontFamily: 'Arial, sans-serif',
-                                    whiteSpace: 'pre-wrap'
-                                },
+                            onChange={(value) => handleSectionChange("contact", "content", value)}
+                            style={{
+                                textAlign: 'center',
+                                color: '#555',
+                                fontSize: '0.9em',
+                                fontFamily: 'Arial, sans-serif',
+                                width: '80%',
+                                margin: '0 auto'
                             }}
-                            sx={{
-                                '& .MuiInputBase-root': {
-                                    width: '70%',
-                                    margin: '0 auto'
-                                },
-                                '& .MuiInputBase-input': {
-                                    textAlign: 'center',
-                                    padding: '0'
-                                }
-                            }}
+                            defaultColor="#555"
+                            isNameHeading={true}
                         />
                     </div>
 
