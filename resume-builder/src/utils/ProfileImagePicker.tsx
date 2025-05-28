@@ -11,6 +11,7 @@ interface ProfileImagePickerProps {
     tooltipText?: string;
     backgroundColor?: string;
     borderRadius?: string;
+    initialImage?: string;  // Add this prop for initial image URL
 }
 
 const ProfileImagePicker: React.FC<ProfileImagePickerProps> = ({
@@ -20,10 +21,18 @@ const ProfileImagePicker: React.FC<ProfileImagePickerProps> = ({
     imageStyle,
     tooltipText = "Click to add photo",
     backgroundColor = Colors.BACKGROUND.LIGHT,
-    borderRadius = '75px 75px 0 0'
+    borderRadius = '75px 75px 0 0',
+    initialImage = ''  // Add default value
 }) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const [imageUrl, setImageUrl] = useState<string>('');
+    const [imageUrl, setImageUrl] = useState<string>(initialImage);  // Initialize with initialImage
+
+    // Update imageUrl when initialImage changes
+    React.useEffect(() => {
+        if (initialImage) {
+            setImageUrl(initialImage);
+        }
+    }, [initialImage]);
 
     const handleImageClick = () => {
         fileInputRef.current?.click();

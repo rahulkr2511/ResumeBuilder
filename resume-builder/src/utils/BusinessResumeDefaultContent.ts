@@ -14,6 +14,7 @@ export interface IBusinessResumeData {
     computerSkills: ResumeSection;
     workExperience: ResumeSection;
     contact: ResumeSection;
+    profilePhoto?: ResumeSection;  // Optional profile photo section
   }
   
 export const defaultResumeContent: IBusinessResumeData = {
@@ -24,6 +25,10 @@ export const defaultResumeContent: IBusinessResumeData = {
     title: {
       heading: "Title",
       content: "Business Administration",
+    },
+    profilePhoto: {
+      heading: "Profile Photo",
+      content: ""  // Empty by default, will be populated when user selects an image
     },
     profile: {
       heading: "Profile",

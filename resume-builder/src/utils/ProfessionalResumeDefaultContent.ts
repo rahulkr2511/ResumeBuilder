@@ -19,6 +19,7 @@ export interface IProfessionalResumeData {
     workExperience: ResumeSection;
     education: ResumeSection;
     additionalInfo: ResumeSection;
+    profilePhoto?: ResumeSection;  // Optional profile photo section
 }
 
 export const defaultResumeContent: IProfessionalResumeData = {
@@ -29,6 +30,10 @@ export const defaultResumeContent: IProfessionalResumeData = {
     contact: {
         heading: "CONTACT",
         content: `123 Anywhere St., Any City • 123-456-7890 • hello@reallygreatsite.com • www.reallygreatsite.com`
+    },
+    profilePhoto: {
+        heading: "Profile Photo",
+        content: ""  // Empty by default, will be populated when user selects an image
     },
     summary: {
         heading: "SUMMARY",

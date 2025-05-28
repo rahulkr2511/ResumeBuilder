@@ -28,7 +28,6 @@ const CreateResumeBasic = () => {
     const dispatch = useDispatch();
     const defaultResumeContentFromStore = useSelector(getCreativeResumeBasicData);
     const [resumeData, setResumeData] = React.useState<ICreativeResumeData>(defaultResumeContentFromStore);
-    const [profileImage, setProfileImage] = useState<string>('');
     
     const handleSectionChange = (section: keyof ICreativeResumeData, field: 'heading' | 'content', value: string) => {
         setResumeData(prev => ({
@@ -41,7 +40,13 @@ const CreateResumeBasic = () => {
     };
 
     const handleImageSelect = (imageUrl: string) => {
-        setProfileImage(imageUrl);
+        setResumeData(prev => ({
+            ...prev,
+            profilePhoto: {
+                heading: "Profile Photo",
+                content: imageUrl
+            }
+        }));
     };
 
     /**
@@ -114,6 +119,7 @@ const CreateResumeBasic = () => {
                                     backgroundColor={Colors.BACKGROUND.CREAM}
                                     containerStyle={{ marginBottom: '24px' }}
                                     tooltipText="Add Profile Photo"
+                                    initialImage={resumeData.profilePhoto?.content || ''}
                                 />
                                 <Box sx={{ mb: 4 }}>
                                     <RichTextField

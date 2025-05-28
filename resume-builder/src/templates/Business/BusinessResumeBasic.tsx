@@ -16,7 +16,6 @@ const BusinessResumeBasic = () => {
     const resumeDataFromStore = useSelector(getBusinessBasicResumeData);
     const dispatch = useDispatch();
     const [resumeData, setResumeData] = useState<IBusinessResumeData>(resumeDataFromStore);
-    const [profileImage, setProfileImage] = useState<string>('');
     const resumeRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
 
@@ -31,7 +30,13 @@ const BusinessResumeBasic = () => {
     };
 
     const handleImageSelect = (imageUrl: string) => {
-        setProfileImage(imageUrl);
+        setResumeData(prev => ({
+            ...prev,
+            profilePhoto: {
+                heading: "Profile Photo",
+                content: imageUrl
+            }
+        }));
     };
 
     /**
@@ -97,6 +102,7 @@ const BusinessResumeBasic = () => {
                                 containerStyle={{ marginBottom: '32px' }}
                                 tooltipText="Add Profile Photo"
                                 borderRadius="50%"
+                                initialImage={resumeData.profilePhoto?.content || ''}
                             />
 
                             <Box sx={{ mb: 4 }}>

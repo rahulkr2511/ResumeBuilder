@@ -1,4 +1,3 @@
-
 interface ResumeSection {
   heading: string;
   content: string;
@@ -12,6 +11,7 @@ export interface ICreativeResumeData {
     membership: ResumeSection;
     education: ResumeSection;
     experience: ResumeSection;
+    profilePhoto?: ResumeSection;  // Optional profile photo section
 }
 
 
@@ -40,6 +40,10 @@ export const defaultResumeContent: ICreativeResumeData = {
           </div>
         </div>
       `,
+    },
+    profilePhoto: {
+        heading: "Profile Photo",
+        content: ""  // Empty by default, will be populated when user selects an image
     },
     summary: {
       heading: "PROFESSIONAL SUMMARY",
