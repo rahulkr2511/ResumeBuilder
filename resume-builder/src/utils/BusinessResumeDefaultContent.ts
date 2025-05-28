@@ -1,4 +1,12 @@
-import { Colors } from '../constants/Colors';
+
+/**
+ * Default content for the business resume builder.
+ * This file defines the structure and default content for a business resume.
+ * It includes sections such as name, title, profile, education, language skills,
+ * computer skills, work experience, contact information, and an optional profile photo.
+ * Each section is represented by an object with a heading and content.
+ */
+
 
 interface ResumeSection {
     heading: string;

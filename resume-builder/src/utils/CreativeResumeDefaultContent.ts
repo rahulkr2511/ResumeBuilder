@@ -1,3 +1,11 @@
+/**
+ * This file contains the default content for a creative resume.
+ * It defines the structure and initial content for various sections of the resume.
+ * The content includes sections like name, contact information, professional summary, skills, certification, membership, education, experience, and an optional profile photo.
+ * Each section is represented by an object with a heading and content.
+ */
+
+
 interface ResumeSection {
   heading: string;
   content: string;

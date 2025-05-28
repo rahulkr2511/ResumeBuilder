@@ -66,6 +66,23 @@ const CreateResumeBasic = () => {
     }
 
     const handleDownloadPDF = async () => {
+        /**
+         * * * Function to download the resume as a PDF
+         * * * It uses the `downloadResumePDF` utility function to generate the PDF
+         * * * with the current resume data and styles.
+         * * * The `extractComputedStyles` function is used to get the styles from the resume container.
+         * * * If an error occurs during PDF generation, it logs the error to the console.
+         * * * @async
+         * * * @function handleDownloadPDF
+         * * * @returns {Promise<void>} A promise that resolves when the PDF is downloaded
+         * * * @throws {Error} If there is an error during PDF generation
+         * * * @description
+         * * * This function is triggered when the user clicks the download button in the resume header.
+         * * * It generates a PDF of the resume using the current data and styles,
+         * * * allowing users to save or print their resume in a professional format.
+         * * * It ensures that the PDF matches the visual layout of the resume displayed on the screen.
+         * *
+         */
        await downloadResumePDF({
                    resumeRef,
                    extractComputedStyles,

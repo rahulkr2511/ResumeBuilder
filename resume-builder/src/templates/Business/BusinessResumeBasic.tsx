@@ -12,6 +12,15 @@ import { Colors } from '../../constants/Colors';
 import { downloadResumePDF } from '../../utils/downloadResumePDF';
 import '../../styles/BusinessResumeBasic.css';
 
+/**
+ * 
+ * @returns The BusinessResumeBasic component renders a business resume template
+ *          allowing users to edit their resume details, save changes, and download it as a PDF.
+ *          It uses Material-UI for styling and layout, and integrates with Redux for state management.
+ *          The component includes features like rich text editing, dynamic section handling,
+ *          and PDF generation with exact dimensions and styles.
+ */
+
 const BusinessResumeBasic = () => {
     const resumeDataFromStore = useSelector(getBusinessBasicResumeData);
     const dispatch = useDispatch();
@@ -56,6 +65,27 @@ const BusinessResumeBasic = () => {
     }
 
     const handleDownloadPDF = async () => {
+        /**
+         * * Downloads the resume as a PDF file.
+         * * It uses the `downloadResumePDF` utility function to generate the PDF
+         * * with the current resume data and styles.
+         * * The `extractComputedStyles` function is used to get the styles applied to the resume.
+         * * If an error occurs during PDF generation, it logs the error to the console.
+         * * @returns {Promise<void>}
+         *  * @throws {Error} If there is an error during PDF generation
+         *  * @description
+         *  * This function is triggered when the user clicks the download button.
+         *  * It generates a PDF of the current resume using the `downloadResumePDF` utility.
+         *  * The PDF will include all the styles and content as displayed in the resume editor.
+         *  * The generated PDF will be downloaded to the user's device.
+         *  * @example
+         *  * handleDownloadPDF();
+         *  * @see downloadResumePDF
+         *  * @see useExtractComputedStyles
+         *  * @see ResumeHeader
+         *  * @see ProfileImagePicker
+         *  * @see RichTextField    
+         */
         await downloadResumePDF({
             resumeRef,
             extractComputedStyles,
