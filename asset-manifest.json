@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e016ae4d.css",
+    "main.js": "/static/js/main.32acec28.js",
+    "static/css/43.a0b08b4b.chunk.css": "/static/css/43.a0b08b4b.chunk.css",
+    "static/js/43.9f3f63a2.chunk.js": "/static/js/43.9f3f63a2.chunk.js",
+    "static/css/505.ab682c9f.chunk.css": "/static/css/505.ab682c9f.chunk.css",
+    "static/js/505.b78bc935.chunk.js": "/static/js/505.b78bc935.chunk.js",
+    "static/css/133.6d0f6f1a.chunk.css": "/static/css/133.6d0f6f1a.chunk.css",
+    "static/js/133.5a4843dd.chunk.js": "/static/js/133.5a4843dd.chunk.js",
+    "static/js/453.10b9a410.chunk.js": "/static/js/453.10b9a410.chunk.js",
+    "static/js/977.41e60b88.chunk.js": "/static/js/977.41e60b88.chunk.js",
+    "static/js/732.f830ecb1.chunk.js": "/static/js/732.f830ecb1.chunk.js",
+    "static/js/336.85aa4a5e.chunk.js": "/static/js/336.85aa4a5e.chunk.js",
+    "static/js/809.a7ff58af.chunk.js": "/static/js/809.a7ff58af.chunk.js",
+    "index.html": "/index.html",
+    "main.e016ae4d.css.map": "/static/css/main.e016ae4d.css.map",
+    "main.32acec28.js.map": "/static/js/main.32acec28.js.map",
+    "43.a0b08b4b.chunk.css.map": "/static/css/43.a0b08b4b.chunk.css.map",
+    "43.9f3f63a2.chunk.js.map": "/static/js/43.9f3f63a2.chunk.js.map",
+    "505.ab682c9f.chunk.css.map": "/static/css/505.ab682c9f.chunk.css.map",
+    "505.b78bc935.chunk.js.map": "/static/js/505.b78bc935.chunk.js.map",
+    "133.6d0f6f1a.chunk.css.map": "/static/css/133.6d0f6f1a.chunk.css.map",
+    "133.5a4843dd.chunk.js.map": "/static/js/133.5a4843dd.chunk.js.map",
+    "453.10b9a410.chunk.js.map": "/static/js/453.10b9a410.chunk.js.map",
+    "977.41e60b88.chunk.js.map": "/static/js/977.41e60b88.chunk.js.map",
+    "732.f830ecb1.chunk.js.map": "/static/js/732.f830ecb1.chunk.js.map",
+    "336.85aa4a5e.chunk.js.map": "/static/js/336.85aa4a5e.chunk.js.map",
+    "809.a7ff58af.chunk.js.map": "/static/js/809.a7ff58af.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e016ae4d.css",
+    "static/js/main.32acec28.js"
+  ]
+}
