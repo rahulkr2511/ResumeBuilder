@@ -47,7 +47,7 @@ const Home: React.FC = () => {
           }}>
             <Box 
               component="img"
-              src="/images/logo-icon.png"
+              src="images/logo-icon.png"
               alt="CraftMyCV Logo"
               sx={{
                 height: '80px',

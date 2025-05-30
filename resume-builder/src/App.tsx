@@ -37,7 +37,7 @@ const App: React.FC = () => {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Router>
+        <Router basename='ResumeBuilder/'>
           <div className="App">
             <Routes>
               <Route path="/" element={<Home />} />
